@@ -14,7 +14,7 @@ const {
     notFoundRouter,
     serverErrorRouter,
     usersRouter
-} = require('./routers/routers');
+} = require('./routers');
 
 /**
  * @title - Установка механизма представления handlebars
