@@ -14,7 +14,7 @@ const {
     notFoundRouter,
     serverErrorRouter,
     usersRouter
-} = require('./routers/routers');
+} = require('./routers');
 
 /**
  * @title - Установка механизма представления handlebars
@@ -29,9 +29,9 @@ server.use(morgan('dev'));
 /**
  * @title - Middleware
  */
-server.get('/', homeRouter);
-server.get('/search', searchRouter);
-server.get('/about', aboutRouter);
+server.use('/', homeRouter);
+server.use('/search', searchRouter);
+server.use('/about', aboutRouter);
 server.use('/users', usersRouter);
 
 server.use(notFoundRouter);
