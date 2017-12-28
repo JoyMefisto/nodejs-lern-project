@@ -1,8 +1,10 @@
 const express = require('express');
 const morgan = require('morgan');
-const path = require('path');
+const pug = require('pug');
+
+const config = require('./config');
+
 const server  = express();
-const handlebars = require('express-handlebars').create({ defaultLayout: 'main' });
 
 /**
  * @title - Routers
@@ -17,13 +19,14 @@ const {
 } = require('./routers');
 
 /**
- * @title - Установка механизма представления handlebars
+ * @title - Установка механизма шаблонизатора pug
  */
-server.engine('handlebars', handlebars.engine);
-server.set('view engine', 'handlebars');
+server.set('view engine', 'pug');
+server.set('views', config.paths.views);
 
 server.set('port', process.env.PORT || 3000);
-server.use(express.static(path.join(__dirname, 'public')));
+server.use(express.static(config.paths.public));
+server.use('/lib', express.static(config.paths.lib));
 server.use(morgan('dev'));
 
 /**

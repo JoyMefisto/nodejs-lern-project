@@ -3,8 +3,7 @@ const router = Router();
 
 // GET /
 router.get('/', (req, res) => {
-    res.status('200');
-    res.render('home');
+    res.render('index');
 });
 
 module.exports = router;
