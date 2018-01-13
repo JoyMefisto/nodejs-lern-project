@@ -1,0 +1,47 @@
+[
+  { "id": 1, "name": "The International 2018", "date": "01 августа", "cash": "$ 1,000,000",
+    "team": [
+      { "id": 1, "name": "Natus Vincere" },
+      { "id": 2, "name": "Virtus.Pro" },
+      { "id": 3, "name": "LGD Gaming" },
+      { "id": 4, "name": "Team Empire" },
+      { "id": 5, "name": "NewBee" }
+    ]
+  },
+  { "id": 2, "name": "Epicenter Season 3",     "date": "27 апреля",  "cash": "$ 1,000,000",
+    "team": [
+      { "id": 1, "name": "Natus Vincere" },
+      { "id": 2, "name": "Virtus.Pro" },
+      { "id": 3, "name": "LGD Gaming" },
+      { "id": 4, "name": "Team Empire" },
+      { "id": 5, "name": "NewBee" }
+    ]
+  },
+  { "id": 3, "name": "World Cyber Games 2018", "date": "26 апреля",  "cash": "$ 500,000",
+    "team": [
+      { "id": 1, "name": "Natus Vincere" },
+      { "id": 2, "name": "Virtus.Pro" },
+      { "id": 3, "name": "LGD Gaming" },
+      { "id": 4, "name": "Team Empire" },
+      { "id": 5, "name": "NewBee" }
+    ]
+  },
+  { "id": 4, "name": "DAC 2018",               "date": "30 марта",   "cash": "$ 30,000",
+    "team": [
+      { "id": 1, "name": "Natus Vincere" },
+      { "id": 2, "name": "Virtus.Pro" },
+      { "id": 3, "name": "LGD Gaming" },
+      { "id": 4, "name": "Team Empire" },
+      { "id": 5, "name": "NewBee" }
+    ]
+  },
+  { "id": 5, "name": "DreamLeague Season 9",   "date": "21 марта",   "cash": "$ 30,000",
+    "team": [
+      { "id": 1, "name": "Natus Vincere" },
+      { "id": 2, "name": "Virtus.Pro" },
+      { "id": 3, "name": "LGD Gaming" },
+      { "id": 4, "name": "Team Empire" },
+      { "id": 5, "name": "NewBee" }
+    ]
+  }
+]

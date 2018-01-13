@@ -1,0 +1,12 @@
+extends _layout
+
+block content
+    h1 Турнир
+    p= oneTournament.name
+
+    each team in oneTournament.team
+        li
+            a(href=`${oneTournament.id}/${team.id}`)= team.name
+
+
+

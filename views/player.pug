@@ -1,0 +1,7 @@
+extends _layout
+
+block content
+    h1 Список игроков
+
+    each player in listPlayer
+        li= player.name

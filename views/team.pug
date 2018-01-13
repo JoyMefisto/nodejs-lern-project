@@ -1,0 +1,9 @@
+extends _layout
+
+block content
+    h1 Команды
+
+    each t in team
+        li
+        - var url = t.url
+            a('href'=url)= t.name

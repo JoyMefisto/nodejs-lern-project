@@ -1,10 +1,10 @@
 const { Router } = require('express');
 const router = Router();
+const dota =
 
-// GET /
+// GET /dota
 router.get('/', (req, res) => {
-    res.render('index');
+    res.render('games/dota');
 });
-
 
 module.exports = router;

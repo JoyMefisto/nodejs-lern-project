@@ -1,0 +1,7 @@
+[
+  { "id": 1, "url": "dota-2", "name": "Dota 2" },
+  { "id": 2, "name": "Counter-Strice Global-Offensive" },
+  { "id": 3, "name": "Hearthstone" },
+  { "id": 4, "name": "LOL" },
+  { "id": 5, "name": "Overwatch" }
+]

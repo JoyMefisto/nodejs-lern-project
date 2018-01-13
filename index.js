@@ -11,11 +11,11 @@ const server  = express();
  */
 const {
     homeRouter,
-    searchRouter,
-    aboutRouter,
+    newsRouter,
+    gameRouter,
+    usersRouter,
     notFoundRouter,
-    serverErrorRouter,
-    usersRouter
+    serverErrorRouter
 } = require('./routers');
 
 /**
@@ -33,11 +33,52 @@ server.use(morgan('dev'));
  * @title - Middleware
  */
 server.use('/', homeRouter);
-server.use('/search', searchRouter);
-server.use('/about', aboutRouter);
 server.use('/users', usersRouter);
+server.use('/news', newsRouter);
+
+
+/**
+ * @codedojo
+ * В этом роуте содержиться все подмножества роута /:game
+ * Мне кажется, что тут я что-то упускаю, или что-то забыл. Возможно тут как-о стоит использовать next()?
+ */
+server.use('/', gameRouter);
 
 server.use(notFoundRouter);
 server.use(serverErrorRouter);
 
 server.listen(server.get('port'), () => console.log(`localhost:${server.get('port')}`)  );
+
+
+/**
+ * @routes:
+ * / - главная страница с какой-то приветственной информацией
+ * /news - Новости
+ * /news/article - Новость
+ *
+ * /:game - страница конкретной игры, с её описанием(рейтинг, кол-во прошедших турниров, etc)
+ * /:game/:team - список команд этой игры
+ * /:game/:team/:id - команда этой игры
+ * /:game/:team/:player - список игроков это команды
+ * /:game/player - список игроков это игры
+ *
+ * /:game/team/:id/player - список игроков этой команды
+ * /:game/player/:_id - игрок этой игры
+ * /:game/team/:id/player/:_id - игрок этой команды
+
+
+ * /:game/tournament - список турниров
+ * /:game/tournament/:id - страница турнира, с турнирной сеткой
+ * /:game/tournament/:id/:team - команда внутри турнира
+ */
+
+
+// todo: 1. Написать роуты и контроллеры - на проверке
+// todo: 2. Написать ТЗ
+// todo: 3. Настроить сборку
+// todo: 4. Сверстать вьюшки
+// todo: 5. Поставить БД Монгу
+// todo: 6. Доставать данные из Монги (перенести данные в монгу и доставать от туда же)
+
+// todo: Посмотреть на способ динамического генерирования контроллеров
+

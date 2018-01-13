@@ -1,15 +1,18 @@
 const homeRouter = require('./home');
-const searchRouter = require('./search');
-const aboutRouter = require('./about');
+const usersRouter = require('./users');
+const newsRouter = require('./news');
+const gameRouter = require('./game');
 const notFoundRouter = require('./404');
 const serverErrorRouter = require('./500');
-const usersRouter = require('./users');
 
 module.exports = {
     homeRouter,
-    searchRouter,
-    aboutRouter,
+    usersRouter,
+    newsRouter,
+    gameRouter,
     notFoundRouter,
-    serverErrorRouter,
-    usersRouter
+    serverErrorRouter
 }
+
+
+
