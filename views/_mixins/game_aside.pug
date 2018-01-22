@@ -1,0 +1,12 @@
+mixin game_aside(game)
+    aside.game-aside
+        ul.game-aside-list
+            li.game-aside-item
+                a(href=`${game.url}/team`)
+                    span Команды
+            li.game-aside-item
+                a(href=`${game.url}/player`)
+                    span Игроки
+            li.game-aside-item
+                a(href=`${game.url}/tournament`)
+                    span Турниры

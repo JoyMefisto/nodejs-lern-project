@@ -36,13 +36,7 @@ server.use('/', homeRouter);
 server.use('/users', usersRouter);
 server.use('/news', newsRouter);
 
-
-/**
- * @codedojo
- * В этом роуте содержиться все подмножества роута /:game
- * Мне кажется, что тут я что-то упускаю, или что-то забыл. Возможно тут как-о стоит использовать next()?
- */
-server.use('/', gameRouter);
+server.use('/', gameRouter); // /:game
 
 server.use(notFoundRouter);
 server.use(serverErrorRouter);

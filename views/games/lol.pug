@@ -1,4 +1,9 @@
 extends ../_layout
+include ../_mixins/game_aside
+
+block aside
+    +game_aside(game)
+
 
 block content
     h1 lol

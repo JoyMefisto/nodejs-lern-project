@@ -2,6 +2,7 @@ const listGames = require('../data/games');
 const listTeam = require('../data/dota_team');
 const listPlayer = require('../data/dota_team_player');
 const listTournament = require('../data/tournament');
+let baseUrl = '';
 
 /**
  * @codedojo
@@ -12,7 +13,9 @@ const listTournament = require('../data/tournament');
 
 module.exports = {
     showGame(req, res) {
-        res.render(`games/${req.params.game}`, {games: listGames});
+        let game = listGames.find( oneGame => oneGame.game == req.params.game);
+        console.log(game);
+        res.render(`games/${req.params.game}`, { game: game });
     },
     showListTeam(req, res) {
         res.render('team', {team: listTeam});
@@ -38,7 +41,8 @@ module.exports = {
     },
 
     showListTournamentGame(req, res){
-        res.render('tournament', { listTournament: listTournament})
+        console.log(req.params.game);
+        res.render('tournament', { listTournament: listTournament, game: req.params.game})
     },
     showOneTournamentGame(req, res){
         let oneTournament = listTournament.find( oneTournament => oneTournament.id == req.params.id);

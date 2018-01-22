@@ -3,7 +3,7 @@ extends _layout
 block content
     h1 Список Турниров
 
-    each tournament in listTournament
-        li
-            a(href=`${tournament.id}`)= tournament.name
-
+    ul
+        each tournament in listTournament
+            li
+                a(href=`/${game}/tournament/${tournament.id}`)= tournament.name
