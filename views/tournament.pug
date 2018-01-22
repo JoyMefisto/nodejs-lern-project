@@ -1,9 +1,10 @@
 extends _layout
 
 block content
-    h1 Список Турниров
-
-    each tournament in listTournament
-        li
-            a(href=`${tournament.id}`)= tournament.name
-
+    h1 Турнир
+    p= oneTournament.name
+    h3 Список команд
+    ul
+        each team in listTeams
+            li
+                a(href=`/${game}/teams/${team.id}`)= team.name

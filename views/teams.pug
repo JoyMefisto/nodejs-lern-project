@@ -1,0 +1,9 @@
+extends _layout
+
+block content
+    h1 Команды
+
+    ul
+        each team in teams
+            li
+                a(href=`${baseUrl}/${team.id}`)= team.name

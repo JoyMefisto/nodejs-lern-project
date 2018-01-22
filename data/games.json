@@ -1,7 +1,7 @@
 [
-  { "id": 1, "url": "dota-2", "name": "Dota 2" },
-  { "id": 2, "name": "Counter-Strice Global-Offensive" },
-  { "id": 3, "name": "Hearthstone" },
-  { "id": 4, "name": "LOL" },
-  { "id": 5, "name": "Overwatch" }
+  { "id": 1, "game": "dota2", "url": "/dota2", "name": "Dota 2" },
+  { "id": 2, "game": "csgo", "url": "/csgo", "name": "Counter-Strice Global-Offensive" },
+  { "id": 3, "game": "hearthstone", "url": "/hearthstone", "name": "Hearthstone" },
+  { "id": 4, "game": "lol", "url": "/lol", "name": "LOL" },
+  { "id": 5, "game": "overwatch", "url": "/overwatch", "name": "Overwatch" }
 ]

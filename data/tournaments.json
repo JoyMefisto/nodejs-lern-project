@@ -1,0 +1,9 @@
+[
+  { "id": 1, "name": "1 The International 2018", "date": "01 августа", "cash": "$ 1,000,000", "game": "dota2", "teams": [1,2,3,4,5,6] },
+  { "id": 2, "name": "2 The International 2018", "date": "01 августа", "cash": "$ 1,000,000", "game": "dota2", "teams": [1,2,3,4,5,6] },
+  { "id": 3, "name": "3 The International 2018", "date": "01 августа", "cash": "$ 1,000,000", "game": "dota2", "teams": [1,2,3,4,5,6] },
+  { "id": 4, "name": "4 The International 2018", "date": "01 августа", "cash": "$ 1,000,000", "game": "dota2", "teams": [1,2,3,4,5,6] },
+  { "id": 5, "name": "5 The International 2018", "date": "01 августа", "cash": "$ 1,000,000", "game": "dota2", "teams": [1,2,3,4,5,6] },
+  { "id": 6, "name": "6 The International 2018", "date": "01 августа", "cash": "$ 1,000,000", "game": "dota2", "teams": [1,2,3,4,5,6] },
+  { "id": 7, "name": "7 The International 2018", "date": "01 августа", "cash": "$ 1,000,000", "game": "dota2", "teams": [1,2,3,4,5,6] }
+]

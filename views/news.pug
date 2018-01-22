@@ -3,7 +3,7 @@ extends _layout
 block content
     h1 Страница новостей
 
-    each article in news
+    each article in newsList
         li= article.author
-        - var id = article.id
-            a('href'=id)= article.preview
+        - var urlId = `/news/${article.id}`
+            a(href= urlId)= article.preview
