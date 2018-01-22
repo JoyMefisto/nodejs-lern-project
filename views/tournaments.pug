@@ -1,0 +1,9 @@
+extends _layout
+
+block content
+    h1 Список Турниров
+
+    ul
+        each tournament in listTournaments
+            li
+                a(href=`/${game}/tournaments/${tournament.id}`)= tournament.name

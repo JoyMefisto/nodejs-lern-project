@@ -3,5 +3,7 @@ extends _layout
 block content
     h1 Зрители:
 
-    each item in users
-        li= item
+    ul
+    each user in usersList
+        li
+            a(href=`/users/${user.id}`)= user.name
