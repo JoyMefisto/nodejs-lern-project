@@ -4,7 +4,9 @@
   "description": "Pet-project on express for learning",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "start": "npm run dev npm run sass",
+    "dev": "nodemon -r dotenv/config index.js",
+    "sass": "gulp watch:sass",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,10 +25,29 @@
   },
   "homepage": "https://github.com/JoyMefisto/nodejs-lern-project#readme",
   "dependencies": {
+    "dotenv": "^4.0.0",
     "express": "^4.16.2",
-    "pug": "^2.0.0-rc.4"
+    "jquery": "^3.3.1",
+    "material-components-web": "^0.28.0",
+    "normalize.css": "^7.0.0",
+    "pug": "^2.0.0-rc.4",
+    "semantic-ui": "^2.2.13",
+    "serve-favicon": "^2.4.5"
   },
   "devDependencies": {
+    "eslint": "^4.16.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "file-loader": "^0.11.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
     "morgan": "^1.9.0",
     "nodemon": "^1.13.3"
   }

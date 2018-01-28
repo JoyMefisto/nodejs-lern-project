@@ -7,12 +7,21 @@ html(lang="ru")
 
         link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700&subset=cyrillic')
         link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
-        link(rel='stylesheet' href=`/css/app.css`)
+        link(rel='stylesheet' href=`/css/app.css?v=${version}`)
+
+        script(src='/lib/jquery/dist/jquery.min.js')
+        script(src='/lib/semantic-ui/dist/semantic.min.js')
 
         title Киберспортивый проект / Турниры по играм
 
     body
-        block header
-            include _includes/navigate
-        block aside
-        block content
+        div.layout
+            block aside
+                include _includes/aside-menu
+
+            div.layout__main
+                block header
+                    include _includes/header
+                block content
+
+
