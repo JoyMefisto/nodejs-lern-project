@@ -3,6 +3,8 @@ Project on Express.js
 
 ## info
 - `@codedojo` - По этому флагу находится вопрос
+- `sudo kill $(sudo lsof -t -i:3000)` - kill port
+- Ориентируюсь на [этот](http://game-tournaments.com/) проект
 
 #### Install
 - `cd nodejs-lern-project`

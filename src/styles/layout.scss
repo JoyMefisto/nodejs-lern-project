@@ -1,0 +1,19 @@
+.layout {
+  display: flex;
+  flex-direction: row;
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.block-test {
+  width: 100%;
+  height: 400px;
+}
+
+aside ul.ui {
+  padding-left: 0;
+}
