@@ -9,5 +9,6 @@ module.exports = {
         views: path.resolve(__dirname, '..', 'views'),
         public: path.resolve(__dirname, '..', 'public'),
         lib: path.resolve(__dirname, '..', 'node_modules')
-    }
+    },
+    mongodbUrl: 'mongodb://localhost:27017/game-tournaments'
 };

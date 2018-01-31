@@ -4,10 +4,14 @@ const listPlayers = require('../data/dota_team_player');
 const listTournaments = require('../data/tournaments');
 
 module.exports = {
+    setParam(req, res, next, value) {
+        console.log('setParam', value); // value: 'game', 'team_id', 'player_id', 'tournament_id'
+        req[value] = value;
+        next();
+    },
     // GET /:game
     showGame(req, res) {
         let game = listGames.find( oneGame => oneGame.game == req.params.game);
-        console.log(game);
         res.render('game', game);
     },
     // GET /:game/teams
@@ -31,7 +35,6 @@ module.exports = {
     },
     // GET /:game/tournaments
     showListTournamentsGame(req, res){
-        console.log(listTournaments);
         res.render('tournaments/tournaments', { listTournaments: listTournaments, game: req.params.game})
     },
     // GET /:game/tournaments/:tournament_id
