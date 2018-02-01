@@ -3,26 +3,51 @@ const listTeams = require('../data/dota_team');
 const listPlayers = require('../data/dota_team_player');
 const listTournaments = require('../data/tournaments');
 
+const { game: Game, team: Team, player: Player } = require('../models');
+
 module.exports = {
-    setParam(req, res, next, value) {
-        console.log('setParam', value); // value: 'game', 'team_id', 'player_id', 'tournament_id'
-        req[value] = value;
+    setParamGame(req, res, next, game) { // /:game
+        req.game = game;
+        next();
+    },
+    setParamTeamId(req, res, next, team_id) { // /:game/team/:team_id
+        req.team_id = team_id;
+
+        Team.findById(team_id).then(team => {
+            req.team_id_some = team;
+
+            Player.find({ team_id: team.team_id }).then(players => {
+                req.players = players;
+                next();
+            }).catch(next);
+
+        } ).catch(next);
+
+    },
+    setParamPlayerId(req, res, next, player_id) { // /:game/players/:player_id
+        console.log('setParamPlayerId', player_id);
+        req.player_id = player_id;
+        next();
+    },
+    setParamTournamentId(req, res, next, tournament_id) { // /:game/tournaments/:tournament_id
+        req.tournament_id = tournament_id;
         next();
     },
     // GET /:game
     showGame(req, res) {
-        let game = listGames.find( oneGame => oneGame.game == req.params.game);
-        res.render('game', game);
+        Game.findOne({ game: req.game}).then(game => res.render('game', game));
     },
     // GET /:game/teams
     showListTeams(req, res) {
-        let baseUrl = `/${req.params.game}/teams`;
-        res.render('teams/teams', {teams: listTeams, baseUrl: baseUrl, game: req.params.game});
+        let baseUrl = `/${req.game}/teams`;
+        Team.find({}).then(teams => res.render('teams/teams', {teams: teams, baseUrl: baseUrl, game: req.game}))
+
     },
     // GET /:game/teams/:team_id
     showOneTeam(req, res) {
-        let oneTeam = listTeams.find( oneTeam => oneTeam.id == req.params.team_id);
-        res.render('teams/team', {oneTeam: oneTeam, listPlayers: listPlayers, game: req.params.game});
+        Team.findById(req.team_id).then(team => {
+            res.render('teams/team', { oneTeam: team, listPlayers: req.players, game: req.game })
+        });
     },
     // GET /:game/players
     showListPlayersGame(req, res) {
@@ -30,8 +55,7 @@ module.exports = {
     },
     // GET /:game/players/:player_id
     showOnePlayerGame(req, res) {
-        let onePlayer = listPlayers.find( onePlayer => onePlayer.id == req.params.player_id);
-        res.render('players/player', { onePlayer: onePlayer, game: req.params.game })
+        Player.findById(req.player_id).then(player => res.render('players/player', { onePlayer: player, game: req.game }))
     },
     // GET /:game/tournaments
     showListTournamentsGame(req, res){

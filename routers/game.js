@@ -3,10 +3,10 @@ const router = Router();
 
 const game = require('../controllers/game');
 
-router.param('game', game.setParam);
-router.param('team_id', game.setParam);
-router.param('player_id', game.setParam);
-router.param('tournament_id', game.setParam);
+router.param('game', game.setParamGame);
+router.param('team_id', game.setParamTeamId);
+router.param('player_id', game.setParamPlayerId);
+router.param('tournament_id', game.setParamTournamentId);
 // router.param(['game', 'team_id', 'player_id', 'tournament_id'], game.setParam);
 
 router.get('/:game', game.showGame); // GET /:game - Страница одной из игр (dota2|csgo|lol|hearthstone|overwatch)

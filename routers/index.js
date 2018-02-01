@@ -12,7 +12,7 @@ module.exports = {
     gameRouter,
     notFoundRouter,
     serverErrorRouter
-}
+};
 
 
 

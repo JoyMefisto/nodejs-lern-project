@@ -7,8 +7,8 @@ module.exports = {
             next();
         }).catch(next);
     },
-    renderNews(req, res) {
-        Article.find({}).then(articles => res.render('news/news', {newsList: articles}) );
+    renderNews(req, res, next) {
+        Article.find({}).then(articles => res.render('news/news', {newsList: articles}) ).catch(next);
     },
 
     renderArticle(req, res) {
