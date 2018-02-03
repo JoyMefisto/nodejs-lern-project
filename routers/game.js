@@ -7,7 +7,6 @@ router.param('game', game.setParamGame);
 router.param('team_id', game.setParamTeamId);
 router.param('player_id', game.setParamPlayerId);
 router.param('tournament_id', game.setParamTournamentId);
-// router.param(['game', 'team_id', 'player_id', 'tournament_id'], game.setParam);
 
 router.get('/:game', game.showGame); // GET /:game - Страница одной из игр (dota2|csgo|lol|hearthstone|overwatch)
 router.get('/:game/teams', game.showListTeams); // GET /:game/team - список команд этой игры
