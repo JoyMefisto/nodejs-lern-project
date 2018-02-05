@@ -49,3 +49,7 @@ Project on Express.js
 
 // todo: Посмотреть на способ динамического генерирования контроллеров
 ```
+
+/:game/teams/create
+/:game/teams/:teams_id/update
+/:game/teams/:teams_id/delete
