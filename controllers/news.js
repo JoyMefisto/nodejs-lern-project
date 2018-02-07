@@ -3,15 +3,16 @@ const { article: Article  } = require('../models');
 module.exports = {
     findOne(req, res, next, news_id) {
         Article.findById( news_id ).then(article => {
-            req.news_id = article;
+            req.article = article;
             next();
         }).catch(next);
     },
     renderNews(req, res, next) {
-        Article.find({}).then(articles => res.render('news/news', {newsList: articles}) ).catch(next);
+        let baseUrl = '/news';
+        Article.find({}).then(articles => res.render('news/news', {newsList: articles, baseUrl: baseUrl}) ).catch(next);
     },
 
     renderArticle(req, res) {
-        res.render('news/article', { description: req.news_id });
+        res.render('news/article', { article: req.article });
     }
 };
