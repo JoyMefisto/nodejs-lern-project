@@ -18,55 +18,57 @@ Project on Express.js
 
 
 ##### Routers
-* `/` - главная страница
-* Статьи
-    * `/news` - Список статей
-    * `/news/news_id` - Статья
-* Зрители - раздел удалиться
-    * `/users` - Список зрителей 
-    * `/users/:user_id` - Зритель
- * Игры(Dota2, CS:GO, LOL, Hearthstone, Overwatch)
-    * `/:game` - страница конкретной игры, с её описанием(рейтинг, кол-во прошедших турниров, etc)
-    * Команды
-        * `/:game/teams` - список команд этой игры
-        * `/:game/teams/:team_id` - команда этой игры с выводом игроков этой команды
-    * Игроки
-        * `/:game/players` - список игроков этой игры
-        * `/:game/players/:player_id` - игрок этой игры
-    Турниры
-        * `/:game/tournaments` - список турниров
-        * `/:game/tournaments/:tournament_id` - страница турнира, с турнирной сеткой и списком команд
-     
-* `/admin` - административная часть под вопросом
-* Статьи
-    * `/news` - Список статей
-    * `/news/:news_id` - Статья
-    * `/news/create` - Создание статьи
-    * `/news/:news_id/update` - Редактирование статьи
-    * `/news/:news_id/delete` - Удаление статьи
-* Зрители - раздел удалиться
-    * `/users` - Список зрителей 
-    * `/users/:user_id` - Зритель
- * Игры(Dota2, CS:GO, LOL, Hearthstone, Overwatch)
-    * `/:game` - страница конкретной игры, с её описанием(рейтинг, кол-во прошедших турниров, etc)
-    * Команды
-        * `/:game/teams` - список команд этой игры
-        * `/:game/teams/:team_id` - команда этой игры с выводом игроков этой команды
-        * `/:game/teams/create` - Создание команды
-        * `/:game/teams/:team_id/update` - Редактирование команды
-        * `/:game/teams/:team_id/delete` - Удаление команды
-    * Игроки
-        * `/:game/players` - список игроков этой игры
-        * `/:game/players/:player_id` - игрок этой игры
-        * `/:game/players/create` - Создание игрока
-        * `/:game/players/:player_id/update` - Редактирование игрока
-        * `/:game/players/:player_id/delete` - Удаление игрока
-    Турниры
-        * `/:game/tournaments` - список турниров
-        * `/:game/tournaments/:tournament_id` - страница турнира, с турнирной сеткой и списком команд
-        * `/:game/tournaments/create` - Создание турнира
-        * `/:game/tournaments/:tournament_id/update` - Редактирование турнира
-        * `/:game/tournaments/:tournament_id/delete` - Удаление турнира
+* Пользователь
+   * `/` - главная страница
+   * Статьи
+       * `/news` - Список статей
+       * `/news/news_id` - Статья
+   * Зрители - раздел удалиться
+       * `/users` - Список зрителей 
+       * `/users/:user_id` - Зритель
+    * Игры(Dota2, CS:GO, LOL, Hearthstone, Overwatch)
+       * `/:game` - страница конкретной игры, с её описанием(рейтинг, кол-во прошедших турниров, etc)
+       * Команды
+           * `/:game/teams` - список команд этой игры
+           * `/:game/teams/:team_id` - команда этой игры с выводом игроков этой команды
+       * Игроки
+           * `/:game/players` - список игроков этой игры
+           * `/:game/players/:player_id` - игрок этой игры
+       Турниры
+           * `/:game/tournaments` - список турниров
+           * `/:game/tournaments/:tournament_id` - страница турнира, с турнирной сеткой и списком команд
+        
+* Администратор
+   * `/admin` - административная часть под вопросом
+   * Статьи
+       * `/news` - Список статей
+       * `/news/:news_id` - Статья
+       * `/news/create` - Создание статьи
+       * `/news/:news_id/update` - Редактирование статьи
+       * `/news/:news_id/delete` - Удаление статьи
+   * Зрители - раздел удалиться
+       * `/users` - Список зрителей 
+       * `/users/:user_id` - Зритель
+    * Игры(Dota2, CS:GO, LOL, Hearthstone, Overwatch)
+       * `/:game` - страница конкретной игры, с её описанием(рейтинг, кол-во прошедших турниров, etc)
+       * Команды
+           * `/:game/teams` - список команд этой игры
+           * `/:game/teams/:team_id` - команда этой игры с выводом игроков этой команды
+           * `/:game/teams/create` - Создание команды
+           * `/:game/teams/:team_id/update` - Редактирование команды
+           * `/:game/teams/:team_id/delete` - Удаление команды
+       * Игроки
+           * `/:game/players` - список игроков этой игры
+           * `/:game/players/:player_id` - игрок этой игры
+           * `/:game/players/create` - Создание игрока
+           * `/:game/players/:player_id/update` - Редактирование игрока
+           * `/:game/players/:player_id/delete` - Удаление игрока
+       Турниры
+           * `/:game/tournaments` - список турниров
+           * `/:game/tournaments/:tournament_id` - страница турнира, с турнирной сеткой и списком команд
+           * `/:game/tournaments/create` - Создание турнира
+           * `/:game/tournaments/:tournament_id/update` - Редактирование турнира
+           * `/:game/tournaments/:tournament_id/delete` - Удаление турнира
 
 ##### TODO
 ```
