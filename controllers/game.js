@@ -1,5 +1,5 @@
 const { game: Game, team: Team, player: Player, tournament: Tournament } = require('../models');
-const { ObjectID } = require('mongodb');
+// const { ObjectID } = require('mongodb');
 
 module.exports = {
     setParamGame(req, res, next, game) { // /:game
@@ -38,48 +38,48 @@ module.exports = {
         let baseUrl = `/${req.game}/teams`;
         Team.find({ game: req.game }).then(teams => res.render('teams/teams', {teams: teams, baseUrl: baseUrl, game: req.game}))
     },
-    showPageCreateTeam(req, res, next) {
-        Game.find({}).then(games => {
-            res.render('teams/form', { team: new Team(), game: req.game, games: games });
-        });
-    },
-    createTeam(req, res, next) {
-        console.log(req.body);
-        Team.create({
-            _id: ObjectID(Date.now()),
-            name: req.body.name,
-            game: req.body.game
-        })
-            .then(() => res.redirect(`/${req.game}/teams`))
-            .catch(next);
-    },
-    showPageUpdateTeam(req, res, next) {
-        Game.find({}).then(games => {
-
-            res.render('teams/form', {
-                team: req.team,
-                game: req.game,
-                games: games
-            });
-        });
-
-    },
-    updateTeam(req, res, next) {
-        Team.findByIdAndUpdate(req.body.id, req.body)
-            .then(team => res.redirect(`/${req.game}/teams`))
-            .catch(next);
-    },
-    showPageDeleteTeam(req, res, next) {
-        res.render('teams/delete', {
-            team: req.team,
-            game: req.game
-        });
-    },
-    deleteTeam(req, res, next) {
-        req.team.remove()
-            .then(() => res.redirect(`/${req.game}/teams`))
-            .catch(next);
-    },
+    // showPageCreateTeam(req, res, next) {
+    //     Game.find({}).then(games => {
+    //         res.render('teams/form', { team: new Team(), game: req.game, games: games });
+    //     });
+    // },
+    // createTeam(req, res, next) {
+    //     console.log(req.body);
+    //     Team.create({
+    //         _id: ObjectID(Date.now()),
+    //         name: req.body.name,
+    //         game: req.body.game
+    //     })
+    //         .then(() => res.redirect(`/${req.game}/teams`))
+    //         .catch(next);
+    // },
+    // showPageUpdateTeam(req, res, next) {
+    //     Game.find({}).then(games => {
+    //
+    //         res.render('teams/form', {
+    //             team: req.team,
+    //             game: req.game,
+    //             games: games
+    //         });
+    //     });
+    //
+    // },
+    // updateTeam(req, res, next) {
+    //     Team.findByIdAndUpdate(req.body.id, req.body)
+    //         .then(team => res.redirect(`/${req.game}/teams`))
+    //         .catch(next);
+    // },
+    // showPageDeleteTeam(req, res, next) {
+    //     res.render('teams/delete', {
+    //         team: req.team,
+    //         game: req.game
+    //     });
+    // },
+    // deleteTeam(req, res, next) {
+    //     req.team.remove()
+    //         .then(() => res.redirect(`/${req.game}/teams`))
+    //         .catch(next);
+    // },
     // GET /:game/teams/:team_id
     showOneTeam(req, res) {
         res.render('teams/team', { oneTeam: req.team, listPlayers: req.players, game: req.game })
@@ -87,6 +87,7 @@ module.exports = {
     // GET /:game/players
     showListPlayersGame(req, res, next) {
         Player.find({ game: req.game })
+            .populate('team')
             .then(players => {
                 res.render('players/players', { listPlayers: players, game: req.game })
             }).catch(next);

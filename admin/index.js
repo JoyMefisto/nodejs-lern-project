@@ -14,6 +14,6 @@ admin.on('mount', server => {
 
 admin.use('/', routers.adminRouter);
 admin.use('/news', routers.newsRouter);
-// admin.use('/', routers.gameRouter); // /:game
+admin.use('/', routers.gameRouter); // /:game
 
 module.exports = admin;

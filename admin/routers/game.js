@@ -25,11 +25,42 @@ router.route('/:game/teams/:team_id/delete')
 
 router.get('/:game/teams/:team_id', game.showOneTeam); // GET /:game/team/:id - страница команды, этой игры
 
-
+/**
+ * @title {Players}
+ */
 router.get('/:game/players', game.showListPlayersGame); // GET /:game/player/ - список игроков этой игры
+
+router.route('/:game/players/create')
+    .get(game.showPageCreatePlayer)
+    .post(game.createPlayer);
+
+router.route('/:game/players/:player_id/update')
+    .get(game.showPageUpdatePlayer)
+    .post(game.updatePlayer);
+
+router.route('/:game/players/:player_id/delete')
+    .get(game.showPageDeletePlayer)
+    .post(game.deletePlayer);
+
 router.get('/:game/players/:player_id', game.showOnePlayerGame); // GET /:game/player/:_id - игрок этой игры
 
+/**
+ * @title {Tournaments}
+ */
 router.get('/:game/tournaments', game.showListTournamentsGame); // GET /:game/tournaments - список турниров
+
+router.route('/:game/tournaments/create')
+    .get(game.showPageCreateTournament)
+    .post(game.createTournament);
+
+router.route('/:game/tournaments/:tournament_id/update')
+    .get(game.showPageUpdateTournament)
+    .post(game.updateTournament);
+
+router.route('/:game/tournaments/:tournament_id/delete')
+    .get(game.showPageDeleteTournament)
+    .post(game.deleteTournament);
+
 router.get('/:game/tournaments/:tournament_id', game.showOneTournamentGame); // GET /:game/tournament/:id - страница турнира, с турнирной сеткой
 
 module.exports = router;

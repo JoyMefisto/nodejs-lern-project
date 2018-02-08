@@ -1,0 +1,27 @@
+extends ../_layout
+
+block aside
+    include ../_includes/aside-menu-two
+
+block content
+    h1 Список Турниров
+
+    a.ui.primary.button(href=`${baseUrl}/create`) New team
+
+    .ui.cards
+        each tournament in listTournaments
+            .card
+                .content
+                    img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
+                    .header
+                        a(href=`/admin/${game}/tournaments/${tournament.id}`)= tournament.name
+                    .meta
+                        = tournament.date
+                    .meta
+                        =tournament.game
+                    .description
+                        = tournament.cash
+                    .extra.content
+                        .ui.two.buttons
+                            a.ui.basic.green.button(href=`${baseUrl}/${tournament.id}/update`) Изменить
+                            a.ui.basic.red.button(href=`${baseUrl}/${tournament.id}/delete`) Удалить

@@ -15,4 +15,4 @@ block content
             div.field
                 button(type='submit' class='ui green button')= article._id ? 'Сохранить' : 'Создать'
                 if article._id
-                    a(href=`/admin/news/:${article._id}/delete`) Удалить
+                    a(href=`/admin/news/${article._id}/delete`) Удалить

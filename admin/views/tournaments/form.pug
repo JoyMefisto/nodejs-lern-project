@@ -1,0 +1,26 @@
+extends ../_layout
+
+block content
+    div.container__form.margin__row_20
+        form(method='post').ui.form
+            div.field
+                input(type='hidden' name='secret_string' value='qwerty')
+                div(class="ui input field")
+                    input(name='id' value= tournament._id || '' placeholder="ID" type='hidden')
+                    input(name='name' type='text' value=tournament.name placeholder='Название турнира' required)
+            div.field
+                input(name='date' type='text' value=tournament.date placeholder='Дата проведения' required)
+            div.field
+                input(name='cash' type='text' value=tournament.cash placeholder='Призовой фонд' required)
+            div.field
+                select(name="game")
+                    each gameOne in games
+                        if gameOne.game == game
+                            option(value=gameOne.game selected)= gameOne.name
+                        else
+                            option(value=gameOne.game )= gameOne.name
+
+            div.field
+                button(type='submit' class='ui green button')= tournament._id ? 'Сохранить' : 'Создать'
+                if tournament._id
+                    a(href=`/admin/${game}/tournaments/${tournament._id}/delete`) Удалить

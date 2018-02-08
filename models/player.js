@@ -2,10 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Player = new Schema({
-    // team_id: { type: Schema.Types.ObjectId }, // №1
+    team_id: { type: Schema.Types.ObjectId }, // №1
+    _id: { type: Schema.Types.ObjectId },
     name: String,
     game: String,
     url: String
+}, {
+    versionKey: false // You should be aware of the outcome after set to false (add field '__v' )
 });
 
 // №2
