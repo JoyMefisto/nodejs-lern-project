@@ -1,0 +1,27 @@
+extends ../_layout
+
+block aside
+    include ../_includes/aside-menu-two
+
+block content
+    h1 Список игроков
+
+    a.ui.primary.button(href=`${baseUrl}/create`) New team
+
+    .ui.cards
+        each player in listPlayers
+            .card
+                .content
+                    img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
+                    .header
+                        a(href=`/admin/${game}/players/${player.id}`)= player.name
+                    .meta
+                        = player.game
+                    .meta
+                        = player.team.name || 'empty'
+                    .description
+                        | Elliot requested permission to view your contact details
+                .extra.content
+                    .ui.two.buttons
+                        a.ui.basic.green.button(href=`${baseUrl}/${player.id}/update`) Изменить
+                        a.ui.basic.red.button(href=`${baseUrl}/${player.id}/delete`) Удалить

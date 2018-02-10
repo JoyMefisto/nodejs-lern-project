@@ -1,7 +1,7 @@
 [
-  { "id": 1, "name": "Natus Vincere", "players": [1,2,3,4,5,6] },
-  { "id": 2, "name": "Virtus.Pro" },
-  { "id": 3, "name": "LGD Gaming" },
-  { "id": 4, "name": "Team Empire" },
-  { "id": 5, "name": "NewBee" }
+  { "id": 1, "name": "Natus Vincere", "game": "dota2","players_id": [1,2,3,4,5] },
+  { "id": 2, "name": "Virtus.Pro", "game": "dota2","players_id": [7,8,9,10,11] },
+  { "id": 3, "name": "LGD Gaming", "game": "dota2","players_id": [12,13,14,15,6] },
+  { "id": 4, "name": "Team Empire", "game": "dota2","players_id": [17,18,19,20,21] },
+  { "id": 5, "name": "NewBee", "game": "dota2","players_id": [22,23,24,25,26] }
 ]

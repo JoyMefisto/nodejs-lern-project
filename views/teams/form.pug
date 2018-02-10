@@ -1,0 +1,25 @@
+extends ../_layout
+
+block aside
+    include ../_includes/aside-menu-two
+
+block content
+    div.container__form.margin__row_20
+        form(method='post').ui.form
+            div.field
+                input(type='hidden' name='secret_string' value='qwerty')
+                div(class="ui input field")
+                    input(name='id' value= team._id||'' placeholder="ID" type='hidden')
+                    input(name='name' type='text' value=team.name placeholder='Название' required)
+                div.field
+                    select(name="game")
+                        each gameOne in games
+                            if gameOne.game == game
+                                option(value=gameOne.game selected)= gameOne.name
+                            else
+                                option(value=gameOne.game )= gameOne.name
+
+            div.field
+                button(type='submit' class='ui green button')= team._id ? 'Сохранить' : 'Создать'
+                if team._id
+                    a(href=`/${game}/teams/:${team._id}/delete`) Удалить

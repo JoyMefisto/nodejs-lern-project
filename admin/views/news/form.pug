@@ -1,0 +1,18 @@
+extends ../_layout
+
+block content
+    div.container__form.margin__row_20
+        form(method='post').ui.form
+            div.field
+                input(type='hidden' name='secret_string' value='qwerty')
+                div(class="ui input field")
+                    input(name='id' value= article._id || '' placeholder="ID" type='hidden')
+                    input(name='author' type='text' value=article.author placeholder='Автор' required)
+                div.field
+                    input(name='description' type='text' value=article.description placeholder='Описание' required)
+                    input(name='preview' type='text' value=article.preview placeholder='Превью' required)
+
+            div.field
+                button(type='submit' class='ui green button')= article._id ? 'Сохранить' : 'Создать'
+                if article._id
+                    a(href=`/admin/news/${article._id}/delete`) Удалить

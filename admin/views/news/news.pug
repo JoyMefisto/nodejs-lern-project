@@ -1,0 +1,22 @@
+extends ../_layout
+
+block content
+    h1 Страница статей
+
+    a.ui.primary.button(href=`${baseUrl}/create`) New Article
+
+    .ui.cards
+        each article in newsList
+            .card
+                .content
+                    img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
+                    .header
+                        a(href=`${baseUrl}/${article.id}`)= article.title|| 'text'
+                    .meta
+                        =article.author
+                    .description
+                        =article.preview
+                .extra.content
+                    .ui.two.buttons
+                        a.ui.basic.green.button(href=`${baseUrl}/${article.id}/update`) Изменить
+                        a.ui.basic.red.button(href=`${baseUrl}/${article.id}/delete`) Удалить

@@ -1,9 +1,16 @@
 extends ../_layout
 
 block content
-    h1 Страница новостей
+    h1 Страница статей
 
-    each article in newsList
-        li= article.author
-        - var urlId = `/news/${article.id}`
-            a(href= urlId)= article.preview
+    .ui.cards
+        each article in newsList
+            .card
+                .content
+                    img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
+                    .header
+                        a(href=`${baseUrl}/${article.id}`)= article.title || 'text'
+                    .meta
+                        =article.author
+                    .description
+                        =article.preview

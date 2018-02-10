@@ -2,6 +2,8 @@ const { Router } = require('express');
 const router = Router();
 const news = require('../controllers/news');
 
+router.param('news_id', news.findOne);
+
 // GET /news
 router.get('/', news.renderNews);
 
