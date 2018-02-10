@@ -1,0 +1,18 @@
+extends ../_layout
+
+block aside
+
+block content
+    .ui.container
+        h1 Страница регистрации
+        form(method='POST').ui.form
+            .field
+                label E-mail
+                input(type='email', name='email', placeholder='E-mail')
+            .field
+                label Пароль
+                input(type='password', name='password', placeholder='Пароль')
+            .field
+                label Повторите пароль
+                input(type='password', name='password_confirm', placeholder='Повторите пароль')
+            button.ui.button(type='submit') Submit

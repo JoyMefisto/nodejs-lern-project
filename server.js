@@ -23,6 +23,7 @@ server.use(express.urlencoded({ extended: false }));
 server.use(morgan('dev'));
 
 server.use('/', routers.homeRouter);
+server.use('/auth', routers.authRouter);
 server.use('/users', routers.usersRouter);
 server.use('/news', routers.newsRouter);
 server.use('/admin', admin);

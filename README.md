@@ -63,7 +63,7 @@ Project on Express.js
            * `/:game/players/create` - Создание игрока
            * `/:game/players/:player_id/update` - Редактирование игрока
            * `/:game/players/:player_id/delete` - Удаление игрока
-       Турниры
+       * Турниры
            * `/:game/tournaments` - список турниров
            * `/:game/tournaments/:tournament_id` - страница турнира, с турнирной сеткой и списком команд
            * `/:game/tournaments/create` - Создание турнира

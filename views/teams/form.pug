@@ -22,4 +22,4 @@ block content
             div.field
                 button(type='submit' class='ui green button')= team._id ? 'Сохранить' : 'Создать'
                 if team._id
-                    a(href=`/${game}/teams/:${team._id}/delete`) Удалить
+                    a(href=`/${game}/teams/:${team._id}/delete` class='ui red button') Удалить
