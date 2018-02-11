@@ -1,7 +1,13 @@
 .ui.small.menu
     .right.menu
-        .item
-            //.ui.primary.button Sign Up
-            a(href='/auth/register' class='ui primary button') Регистрация
-            a(href='/auth/login' class='ui primary button') Войти
+        unless user
+            .item
+                a(href='/auth/register' class='ui primary button') Регистрация
+            .item
+                a(href='/auth/login' class='ui primary button') Войти
             //a(href='/auth/logout' class='ui primary button') Выйти
+        else
+            .item
+                a(href='/profile' class='ui primary button')= user.email
+            .item
+                a(href='/auth/logout' class='ui primary button') Выйти
