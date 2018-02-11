@@ -34,7 +34,6 @@ module.exports = {
 
         User.authenticate(email, password)
             .then(user => {
-                console.log('user', user);
                 req.session.userId = user.id;
                 res.redirect('/profile');
             })
@@ -43,10 +42,7 @@ module.exports = {
 
     logout(req, res, next) {
         if (req.session) {
-            // console.log('session');
-            // console.log('1', req.session.destroy);
             req.session.destroy(error => {
-                // console.log('error', error);
                 if (error) return next(error);
 
                 res.redirect('/');
