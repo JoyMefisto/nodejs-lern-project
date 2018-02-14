@@ -12,10 +12,15 @@ const User = new Schema({
         maxlength: [256, 'Адрес электронный почты слишком длинный.'],
         match: [/^[a-zA-Z0-9'._%+-]+@[a-zA-Z0-9-][a-zA-Z0-9.-]*\.[a-zA-Z]{2,63}$/, 'Неверный формат адреса электронной почты.']
     },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    role: { type: String, default: 'user', enum: ['user', 'admin'] }
 }, {
     versionKey: false, // You should be aware of the outcome after set to false (add field '__v' )
     timestamps: true
+});
+
+User.virtual('isAdmin').get(function() {
+    return this.role === 'admin';
 });
 
 User.pre('save', function(next) {

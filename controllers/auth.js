@@ -6,12 +6,12 @@ module.exports = {
     },
 
     register(req, res, next) {
-        let { email, password, password_confirm } = req.body;
+        let { email, password, password_confirm, role } = req.body;
 
         if (!email || !password) return next(new Error('Необходимо ввести email и пароль'));
         else if (password !== password_confirm) return next (new Error('Пароли не совпадают'));
 
-        User.create({ email, password })
+        User.create({ email, password, role })
             .then(user => {
                 req.session.userId = user.id;
                 res.redirect('/profile');
