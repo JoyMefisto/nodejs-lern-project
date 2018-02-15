@@ -1,4 +1,4 @@
-const { user: User } = require('../models');
+const { user: User } = require('../../shared/models/index');
 
 module.exports = {
     findUser(req, res, next) {

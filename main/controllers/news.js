@@ -1,4 +1,4 @@
-const { article: Article  } = require('../models');
+const { article: Article  } = require('../../shared/models/index');
 
 module.exports = {
     findOne(req, res, next, news_id) {

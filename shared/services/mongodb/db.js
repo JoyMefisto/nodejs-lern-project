@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { mongodbUrl } = require('../../config');
+const { mongodbUrl } = require('../../config/index');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(mongodbUrl);

@@ -4,7 +4,7 @@
   "description": "Pet-project on express for learning",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon -r dotenv/config server.js",
+    "dev": "nodemon -r dotenv/config index.js",
     "sass": "gulp watch:sass",
     "lint": "eslint",
     "test": "echo \"Error: no test specified\" && exit 1"

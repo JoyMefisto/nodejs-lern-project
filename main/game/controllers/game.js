@@ -1,4 +1,4 @@
-const { game: Game, team: Team, player: Player, tournament: Tournament } = require('../models');
+const { game: Game, team: Team, player: Player, tournament: Tournament } = require('../../../shared/models/index');
 // const { ObjectID } = require('mongodb');
 
 module.exports = {

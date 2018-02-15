@@ -1,4 +1,4 @@
-const { article: Article  } = require('../../models');
+const { article: Article  } = require('../../shared/models');
 const { ObjectID } = require('mongodb');
 
 module.exports = {

@@ -1,6 +1,7 @@
 'use srtict';
 
 const path = require('path');
+const ROOT_PATH = path.resolve(__dirname, '..', '..');
 
 module.exports = {
     version: process.env.APP_VERSION,
@@ -8,10 +9,10 @@ module.exports = {
     env: process.env.NODE_ENV,
     sessionSecret: 'Hamm3Jfe1UIweB9',
     paths: {
-        views: path.resolve(__dirname, '..', 'views'),
-        public: path.resolve(__dirname, '..', 'public'),
-        favicon: path.resolve(__dirname, '..', 'public', 'favicon.png'),
-        lib: path.resolve(__dirname, '..', 'node_modules')
+        views: path.join(ROOT_PATH, 'main', 'views'),
+        public: path.join(ROOT_PATH, 'shared', 'public'),
+        favicon: path.join(ROOT_PATH, 'shared', 'public', 'favicon.png'),
+        lib: path.join(ROOT_PATH, 'node_modules')
     },
     mongodbUrl: 'mongodb://localhost:27017/game-tournaments'
 };

@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const auth = require('../controllers/auth');
-const { auth: { unauthenticated, authenticated } } = require('../middleware');
+const { auth: { unauthenticated, authenticated } } = require('../middleware/index');
 
 router.route('/register')
     .all(unauthenticated)

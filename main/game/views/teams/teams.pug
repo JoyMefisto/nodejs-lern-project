@@ -1,0 +1,24 @@
+extends ../_layout
+
+block aside
+    include ../_includes/aside-menu-two
+
+block content
+    h1 Команды
+    //a.ui.primary.button(href=`${baseUrl}/create`) New team
+
+    .ui.cards
+        each team in teams
+            .card
+                .content
+                    img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
+                    .header
+                        a(href=`${baseUrl}/${team.id}`)= team.name
+                    .meta
+                        | Friends of Veronika
+                    .description
+                        | Elliot requested permission to view your contact details
+                //.extra.content
+                //    .ui.two.buttons
+                //        a.ui.basic.green.button(href=`${baseUrl}/${team.id}/update`) Изменить
+                //        a.ui.basic.red.button(href=`${baseUrl}/${team.id}/delete`) Удалить

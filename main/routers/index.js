@@ -3,9 +3,7 @@ const authRouter = require('./auth');
 const profileRouter = require('./profile');
 const usersRouter = require('./users');
 const newsRouter = require('./news');
-const gameRouter = require('./game');
-const notFoundRouter = require('./404');
-const serverErrorRouter = require('./500');
+const gameRouter = require('../game/routers/game');
 
 module.exports = {
     homeRouter,
@@ -13,9 +11,7 @@ module.exports = {
     profileRouter,
     usersRouter,
     newsRouter,
-    gameRouter,
-    notFoundRouter,
-    serverErrorRouter
+    gameRouter
 };
 
 

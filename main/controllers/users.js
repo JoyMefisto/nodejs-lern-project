@@ -1,4 +1,4 @@
-const usersList = require('../data/users');
+const usersList = require('../../shared/data/users');
 
 module.exports = {
     renderUsers(req, res) {

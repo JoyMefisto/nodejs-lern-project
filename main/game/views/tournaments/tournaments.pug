@@ -1,0 +1,19 @@
+extends ../_layout
+
+block aside
+    include ../_includes/aside-menu-two
+
+block content
+    h1 Список Турниров
+
+    ul.ui.cards
+        each tournament in listTournaments
+            li.card
+                .content
+                    img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
+                    .header
+                        a(href=`/${game}/tournaments/${tournament.id}`)= tournament.name
+                    .meta
+                        | Friends of Veronika
+                    .description
+                        | Elliot requested permission to view your contact details
