@@ -9,7 +9,7 @@ module.exports = {
     env: process.env.NODE_ENV,
     sessionSecret: 'Hamm3Jfe1UIweB9',
     paths: {
-        views: path.join(ROOT_PATH, 'main', 'views'),
+        views: path.join(ROOT_PATH, 'public', 'views'),
         public: path.join(ROOT_PATH, 'shared', 'public'),
         favicon: path.join(ROOT_PATH, 'shared', 'public', 'favicon.png'),
         lib: path.join(ROOT_PATH, 'node_modules')

@@ -1,0 +1,17 @@
+.ui.small.menu
+    .left.menu
+        if (player)
+            .item
+                a(href='/profile' class='ui primary button')= player.email
+    .right.menu
+        unless player
+            .item
+                a(href='/auth/register' class='ui primary button') Регистрация
+            .item
+                a(href='/auth/login' class='ui primary button') Войти
+            //a(href='/auth/logout' class='ui primary button') Выйти
+        else
+            .item
+                a(href='/profile' class='ui primary button')= player.email
+            .item
+                a(href='/auth/logout' class='ui primary button') Выйти

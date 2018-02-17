@@ -6,13 +6,15 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
 const admin = require('./admin');
-const main = require('./main');
-const game = require('./main/game');
+const { main, game } = require('./public');
 
-const routers = require('./main/routers');
+const routers = require('./public/main/routers');
+const { auth: middlewareAuth } = require('./public/middleware');
+
 const config = require('./shared/config');
 const middleware = require('./shared/middleware');
-const { auth } = require('./main/middleware');
+const { auth } = require('./public/middleware');
+
 const db = require('./shared/services/mongodb/db');
 const server  = express();
 
@@ -31,25 +33,25 @@ server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
 server.use(morgan('dev'));
 
-// server.use(session({
-//     name: 'sessionId',
-//     secret: config.sessionSecret,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//         httpOnly: true,
-//         // secure: true,
-//         signed: true,
-//         maxAge: 1000 * 60 * 60 * 24 * 3 // 3 days
-//     },
-//     store: new MongoStore({
-//         mongooseConnection: db.connection,
-//         ttl: 60 * 60 * 24 * 3, // 3 days
-//         touchAfter: 60 * 60 * 24 // 1 day
-//     })
-// }));
+server.use(session({
+    name: 'sessionId',
+    secret: config.sessionSecret,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        // secure: true,
+        signed: true,
+        maxAge: 1000 * 60 * 60 * 24 * 3 // 3 days
+    },
+    store: new MongoStore({
+        mongooseConnection: db.connection,
+        ttl: 60 * 60 * 24 * 3, // 3 days
+        touchAfter: 60 * 60 * 24 // 1 day
+    })
+}));
 
-// server.use(auth.findUser);
+server.use(auth.findUser);
 // server.use('/', routers.homeRouter);
 // server.use('/auth', routers.authRouter);
 // server.use(auth.authenticated);
@@ -59,7 +61,7 @@ server.use(morgan('dev'));
 // server.use('/news', routers.newsRouter);
 
 server.use('/', main);
-server.use('/admin', admin);
+server.use('/admin', middlewareAuth.authenticated, admin);
 server.use('/', game); // /:game
 
 server.use(middleware.notFoundRouter);

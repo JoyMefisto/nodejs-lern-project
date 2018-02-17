@@ -1,9 +1,0 @@
-extends ../_layout
-
-block content
-    h1 Зрители:
-
-    ul
-    each user in usersList
-        li
-            a(href=`/users/${user.id}`)= user.name

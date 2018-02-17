@@ -1,0 +1,38 @@
+extends ../_layout
+
+block aside
+
+block content
+    .ui.container
+        h1 Страница регистрации
+        form(method='POST').ui.form
+            if (games)
+                div.field
+                    select(name="game")
+                        each gameOne in games
+                            if gameOne.game == game
+                                option(value=gameOne.game selected)= gameOne.name
+                            else
+                                option(value=gameOne.game )= gameOne.name
+            if (teams)
+                div.field
+                    select(name="team_id")
+                        each team in teams
+                            if player.team_id == team._id
+                                option(value=team._id selected)= team.name
+                            else
+                                option(value=team._id )= team.name
+
+            .field
+                label Ваше имя
+                input(type='text', name='name', placeholder='Имя')
+            .field
+                label E-mail
+                input(type='email', name='email', placeholder='E-mail')
+            .field
+                label Пароль
+                input(type='password', name='password', placeholder='Пароль')
+            .field
+                label Повторите пароль
+                input(type='password', name='password_confirm', placeholder='Повторите пароль')
+            button.ui.button(type='submit') Submit
