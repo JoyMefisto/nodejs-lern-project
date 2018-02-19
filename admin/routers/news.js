@@ -4,7 +4,6 @@ const { news: controller } = require('../controllers');
 
 router.param('news_id', controller.findOne);
 
-
 // GET /admin/news
 router.get('/', controller.renderNews);
 

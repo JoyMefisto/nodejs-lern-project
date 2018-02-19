@@ -3,9 +3,8 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
 const Player = new Schema({
-    team_id: { type: Schema.Types.Array, default: '' }, // №1
-    // _id: { type: Schema.Types.ObjectId },
-    game: { type: Schema.Types.Array, default: '' },
+    team_id: [{ type: Schema.Types.ObjectId, ref: 'Team' }], // храню ObjectId Team (_id: ObjectId(...))
+    game: [{ type: Schema.Types.String, default: '' }],
     name: String,
     url: String,
 
@@ -24,22 +23,25 @@ const Player = new Schema({
     timestamps: true
 });
 
-// №2
+// получаю команды в виртуальном свойстве
 Player.virtual('team', {
     ref: 'Team', // The model to use
     localField: 'team_id', // Find people where `localField` относительно игрока
     foreignField: '_id', // is equal to `foreignField` относительно команды
     // If `justOne` is true, 'members' will be a single doc as opposed to
     // an array. `justOne` is false by default.
-    justOne: true // если один то true
+    justOne: false // если один то true
 });
 
 /**
- * User
+ * Player
  */
 
 Player.virtual('isAdmin').get(function() {
     return this.role === 'admin';
+});
+Player.virtual('isUser').get(function() {
+    return this.role === 'user';
 });
 
 Player.pre('save', function(next) {
@@ -53,7 +55,7 @@ Player.pre('save', function(next) {
         .catch(next);
 });
 
-Player.post('save', function(error, user, next) {
+Player.post('save', function(error, player, next) {
     if (error.name === 'MongoError' && error.code === 11000) {
         next(new Error('Имя пользователя или адрес электронной почты заняты.'));
     } else {
@@ -63,14 +65,14 @@ Player.post('save', function(error, user, next) {
 
 Player.statics.authenticate = function(email, password) {
     return this.findOne({ email })
-        .then(user => {
-            if (!user) {
+        .then(player => {
+            if (!player) {
                 let error = new Error('Пользователь не найден');
                 error.status = 401;
                 throw error;
             }
 
-            return bcrypt.compare(password, user.password)
+            return bcrypt.compare(password, player.password)
                 .then(isEqual => {
                     if (!isEqual) {
                         let error = new Error('Неверный пароль');
@@ -78,7 +80,7 @@ Player.statics.authenticate = function(email, password) {
                         throw error;
                     }
 
-                    return user;
+                    return player;
                 });
         });
 };

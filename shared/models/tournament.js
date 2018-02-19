@@ -9,7 +9,7 @@ const Tournament = new Schema({
     cash: String,
     teams: [{ type: Schema.Types.ObjectId, ref: 'Team' }] // №1
 }, {
-    versionKey: false // You should be aware of the outcome after set to false (add field '__v' )
+    // versionKey: false // You should be aware of the outcome after set to false (add field '__v' )
 });
 
 // №2

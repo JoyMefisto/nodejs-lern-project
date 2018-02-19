@@ -7,7 +7,7 @@ const Team = new Schema({
     game: String,
     url: String,
 }, {
-    versionKey: false // You should be aware of the outcome after set to false (add field '__v' )
+    // versionKey: false // You should be aware of the outcome after set to false (add field '__v' )
 });
 
 Team.virtual('players', {

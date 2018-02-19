@@ -1,4 +1,15 @@
 extends ../_layout
 
 block content
-    h5= player.email
+    h5= player.name
+    .field
+        player.email
+    .field
+        if player.role === 'user'
+            span Пользователь
+        else
+            span Админ
+    h5 Ваши команды:
+    each team in teams
+        .field
+            p= team.name

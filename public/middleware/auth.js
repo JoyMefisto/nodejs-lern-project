@@ -15,8 +15,12 @@ module.exports = {
             next();
         }
     },
+    allowUser(req, res, next) {
+        console.log(req.player);
+        if (req.player.isUser) return next();
+        next('Чтобы создать команду, нужно зарегистрироваться!');
+    },
     authenticated(req, res, next) {
-        console.log('player', req.player);
         if (req.player) return next();
 
         res.status(403).redirect('/auth/login');
