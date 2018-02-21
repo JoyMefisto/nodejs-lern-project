@@ -1,0 +1,31 @@
+extends ../../_layout
+
+block aside
+    include ../../_includes/aside-menu-two
+
+block content
+    div.container__form.margin__row_20
+        form(method='post').ui.form
+            div.field
+                input(type='hidden' name='creatorTeam' value=player._id)
+                div(class="ui input field")
+                    input(name='nameTeam' type='text' placeholder='Название' required)
+                div.ui.list
+                    each gameOne in games
+                        .item
+                            .ui.checkbox
+                                input(id=gameOne.game type='checkbox', name='listGameTeam' value=gameOne.game)
+                                label(for=gameOne.game)= gameOne.name
+
+
+                    //select(name="game")
+                    //    each gameOne in games
+                    //        if gameOne.game == game
+                    //            option(value=gameOne.game selected)= gameOne.name
+                    //        else
+                    //            option(value=gameOne.game )= gameOne.name
+
+            div.field
+                button(type='submit' class='ui green button')= team._id ? 'Сохранить' : 'Создать'
+                if team._id
+                    a(href=`/${game}/teams/:${team._id}/delete` class='ui red button') Удалить

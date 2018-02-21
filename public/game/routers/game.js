@@ -21,12 +21,12 @@ router.route('/:game/teams/create')
 router.get('/:game/teams/:team_id', teams.showOneTeam); // GET /:game/team/:id - страница команды, этой игры
 
 router.route('/:game/teams/:team_id/update')
-    .all(auth.authenticated)
+    .all(auth.authenticated, auth.allowUser)
     .get(game.showPageUpdateTeam)
     .post(game.updateTeam);
 
 router.route('/:game/teams/:team_id/delete')
-    .all(auth.authenticated)
+    .all(auth.authenticated, auth.allowUser)
     .get(game.showPageDeleteTeam)
     .post(game.deleteTeam);
 

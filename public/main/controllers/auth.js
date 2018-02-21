@@ -7,7 +7,7 @@ module.exports = {
     },
 
     register(req, res, next) {
-        let { email, password, password_confirm, role, name, game, team_id } = req.body;
+        let { email, password, password_confirm, role, name, game, teams } = req.body;
 
         if (!email || !password) return next(new Error('Необходимо ввести email и пароль'));
         else if (password !== password_confirm) return next (new Error('Пароли не совпадают'));
@@ -16,7 +16,7 @@ module.exports = {
             _id: ObjectID(Date.now()),
             name,
             game: game,
-            team_id: team_id,
+            teams: teams,
             email,
             password,
             role,

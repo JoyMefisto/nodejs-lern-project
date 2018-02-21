@@ -4,7 +4,7 @@ module.exports = {
     // GET /:game/players
     showListPlayersGame(req, res, next) {
         Player.find({ game: req.game })
-            .populate('team')
+            .populate('teams')
             .then(players => {
                 console.log(players);
                 res.render('players/players', { listPlayers: players, game: req.game })

@@ -16,9 +16,9 @@ block content
                                 option(value=gameOne.game )= gameOne.name
             if (teams)
                 div.field
-                    select(name="team_id")
+                    select(name="teams")
                         each team in teams
-                            if player.team_id == team._id
+                            if player.teams == team._id
                                 option(value=team._id selected)= team.name
                             else
                                 option(value=team._id )= team.name

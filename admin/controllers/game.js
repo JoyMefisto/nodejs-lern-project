@@ -121,7 +121,7 @@ module.exports = {
             _id: ObjectID(Date.now()),
             name: req.body.name,
             game: req.body.game,
-            team_id: ObjectID(req.body.team_id)
+            teams: ObjectID(req.body.teams)
         })
             .then(() => res.redirect(`/admin/${req.game}/players`))
             .catch(next);

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
 const Player = new Schema({
-    team_id: [{ type: Schema.Types.ObjectId, ref: 'Team' }], // храню ObjectId Team (_id: ObjectId(...))
+    teams: [{ type: Schema.Types.ObjectId, ref: 'Team' }], // храню ObjectId команд из Team (_id: ObjectId(...))
     game: [{ type: Schema.Types.String, default: '' }],
     name: String,
     url: String,
@@ -23,25 +23,11 @@ const Player = new Schema({
     timestamps: true
 });
 
-// получаю команды в виртуальном свойстве
-Player.virtual('team', {
-    ref: 'Team', // The model to use
-    localField: 'team_id', // Find people where `localField` относительно игрока
-    foreignField: '_id', // is equal to `foreignField` относительно команды
-    // If `justOne` is true, 'members' will be a single doc as opposed to
-    // an array. `justOne` is false by default.
-    justOne: false // если один то true
-});
-
-/**
- * Player
- */
-
 Player.virtual('isAdmin').get(function() {
     return this.role === 'admin';
 });
-Player.virtual('isUser').get(function() {
-    return this.role === 'user';
+Player.virtual('isPlayer').get(function() {
+    return this.role === 'player' || this.role === 'admin';
 });
 
 Player.pre('save', function(next) {
@@ -85,7 +71,4 @@ Player.statics.authenticate = function(email, password) {
         });
 };
 
-/**
- * end User
- */
 module.exports = mongoose.model('Player', Player);
