@@ -9,7 +9,7 @@ const admin = require('./admin');
 const { main, game } = require('./public');
 
 const routers = require('./public/main/routers');
-const { auth: middlewareAuth } = require('./public/middleware');
+const { auth: middlewareAuth, game: middlewareGame } = require('./public/middleware');
 
 const config = require('./shared/config');
 const middleware = require('./shared/middleware');
@@ -62,7 +62,8 @@ server.use(auth.findUser);
 
 server.use('/', main);
 server.use('/admin', middlewareAuth.authenticated, admin);
-server.use('/', game); // /:game
+
+server.use('/', middlewareGame.allowGame, game); // /:game
 
 server.use(middleware.notFoundRouter);
 server.use(middleware.serverErrorRouter);

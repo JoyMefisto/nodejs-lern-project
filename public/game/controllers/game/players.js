@@ -3,10 +3,9 @@ const { player: Player } = require('../../../../shared/models');
 module.exports = {
     // GET /:game/players
     showListPlayersGame(req, res, next) {
-        Player.find({ game: req.game })
+        Player.find({ participationGame: req.game })
             .populate('teams')
             .then(players => {
-                console.log(players);
                 res.render('players/players', { listPlayers: players, game: req.game })
             }).catch(next);
     },

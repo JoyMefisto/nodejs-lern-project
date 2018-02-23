@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 
-// const middleware = require('../middleware');
 const { game: gameRouter } = require('./routers');
 
 const game = express();

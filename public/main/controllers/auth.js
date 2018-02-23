@@ -22,7 +22,6 @@ module.exports = {
             role,
         })
             .then(player => {
-                console.log(player);
                 req.session.playerId = player.id;
                 res.redirect('/profile');
             })

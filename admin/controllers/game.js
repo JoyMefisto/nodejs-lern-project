@@ -111,12 +111,10 @@ module.exports = {
         let teams = Team.find({});
 
         Promise.all([games, teams]).then(result => {
-            console.log(result);
             res.render('players/form', { player: new Player(), game: req.game, games: result[0], teams: result[1] });
         })
     },
     createPlayer(req, res, next) {
-        console.log(req.body);
         Player.create({
             _id: ObjectID(Date.now()),
             name: req.body.name,
@@ -140,8 +138,6 @@ module.exports = {
         let teams = Team.find({});
 
         Promise.all([games, teams]).then(result => {
-            console.log(result);
-            console.log(req.player);
             res.render('players/form', { player: req.player, game: req.game, games: result[0], teams: result[1] });
         })
     },

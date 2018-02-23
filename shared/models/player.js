@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 const Player = new Schema({
     teams: [{ type: Schema.Types.ObjectId, ref: 'Team' }], // храню ObjectId команд из Team (_id: ObjectId(...))
-    game: [{ type: Schema.Types.String, default: '' }],
+    participationGame: [{ type: Schema.Types.String, default: '' }],
     name: String,
     url: String,
 

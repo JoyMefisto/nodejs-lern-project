@@ -5,12 +5,14 @@ block aside
 
 block content
     h1 Список игроков
+    = JSON.stringify(listPlayers[0])
+    br
+    = JSON.stringify(listPlayers[1])
 
     .ui.cards
         each player in listPlayers
             .card
                 .content
-                    = JSON.stringify(player)
                     img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
                     .header
                         a(href=`/${game}/players/${player.id}`)= player.name

@@ -1,11 +1,18 @@
 const router = require('express').Router();
 const { team: Team } = require('../../../shared/models');
 const { profile } = require('../controllers');
+const { params } = require('../../controllers');
 
-// GET /profile
 router.use(profile.findTeams, profile.findMyTeams);
 
+router.param('game', params.setParamGame);
+router.param('team_id', params.setParamTeamId);
+router.param('player_id', params.setParamPlayerId);
+router.param('tournament_id', params.setParamTournamentId);
+
+// GET /profile
 router.get('/', profile.showProfile);
+router.get('/teams', profile.showMyTeams);
 
 router.route('/teams/create')
     .get(profile.showPageCreateTeam)

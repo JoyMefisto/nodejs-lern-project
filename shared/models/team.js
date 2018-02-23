@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 const Team = new Schema({
     _id: { type: Schema.Types.ObjectId },
-    nameTeam: { type: String, unique: true, sparse: true },
-    listGameTeam: [{ type: Schema.Types.String, default: '' }],
-    creatorTeam: { type: Schema.Types.ObjectId, required: true }
+    nameTeam: { type: String, unique: true, sparse: true }, // Имя команды
+    listGameTeam: [{ type: Schema.Types.String, default: '' }], // Игры, в которых учавствует команда
+    creatorTeam: { type: Schema.Types.ObjectId, required: true } // Создатель команды
     // url: { type: Schema.Types.String, default: '' }
 });
 

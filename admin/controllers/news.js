@@ -12,7 +12,6 @@ module.exports = {
         res.render('news/form', { article: new Article() });
     },
     createArticle(req, res, next) {
-        console.log(req.body);
         Article.create({
             _id: ObjectID(Date.now()),
             author: req.body.author,

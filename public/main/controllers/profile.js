@@ -25,17 +25,25 @@ module.exports = {
             myTeams: req.myTeams
         })
     },
+    showMyTeams(req, res, next) {
+        res.render('profile/teams/teams', {
+            player: req.player,
+            teams: req.teams,
+            myTeams: req.myTeams
+        })
+    },
     // GET /profile/teams/:team_id
     showOneTeam(req, res) {
         res.render('profile/teams/team', { oneTeam: req.team, listPlayers: req.players, game: req.game })
     },
+
     // GET /profile/teams/create
     showPageCreateTeam(req, res, next) {
         Game.find({}).then(games => {
-            console.log(games);
             res.render('profile/teams/create', { player: req.player, team: new Team(), game: req.game, games: games });
         });
     },
+
     // POST /profile/teams/create
     createTeam(req, res, next) {
         let
@@ -49,16 +57,15 @@ module.exports = {
             creatorTeam
         })
             .then((team) => {
-                console.log(team);
                 res.redirect(`/profile`)
             })
             .catch(next);
     },
+
     // GET /profile/teams/:team_id/update
     showPageUpdateTeam(req, res, next) {
         Game.find({}).then(games => {
-
-            res.render('profile/teams/form', {
+            res.render('profile/teams/edit', {
                 team: req.team,
                 game: req.game,
                 games: games

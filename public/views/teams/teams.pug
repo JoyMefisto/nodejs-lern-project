@@ -6,6 +6,8 @@ block aside
 block content
     h1 Команды
     //a.ui.primary.button(href=`${baseUrl}/create`) New team
+    = JSON.stringify(teams)
+    a= JSON.stringify(teams[0])
 
     .ui.cards
         each team in teams
@@ -13,7 +15,7 @@ block content
                 .content
                     img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
                     .header
-                        a(href=`${baseUrl}/${team.id}`)= team.name
+                        a(href=`${baseUrl}/${team.id}`)= team.nameTeam
                     .meta
                         | Friends of Veronika
                     .description

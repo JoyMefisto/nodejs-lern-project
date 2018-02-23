@@ -8,14 +8,16 @@ block content
     div.container__form.margin__row_20
         form(method='post').ui.form
             div.field
+                input(name='id' value= team._id || '' placeholder="ID" type='hidden')
                 input(type='hidden' name='creatorTeam' value=player._id)
                 div(class="ui input field")
-                    input(name='nameTeam' type='text' placeholder='Название' required)
+                    input(name='nameTeam' type='text' placeholder='Название' value=team.nameTeam required)
                 div.ui.list
                     each gameOne in games
                         .item
                             .ui.master.checkbox
-                                input(id=gameOne.game type='checkbox', name='listGameTeam' value=gameOne.game)
+                                - var isCheked = team.listGameTeam.some(el => el === gameOne.game);
+                                input(id=gameOne.game type='checkbox', name='listGameTeam' value=gameOne.game checked=isCheked)
                                 label(for=gameOne.game)= gameOne.name
 
 
@@ -29,4 +31,4 @@ block content
             div.field
                 button(type='submit' class='ui green button')= team._id ? 'Сохранить' : 'Создать'
                 if team._id
-                    a(href=`/${game}/teams/:${team._id}/delete` class='ui red button') Удалить
+                    a(href=`/profile/teams/${team._id}/delete` class='ui red button') Удалить

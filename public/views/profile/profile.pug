@@ -15,16 +15,37 @@ block content
             .row
                 .ui.cards
                     .card
-                        .content
-                            .header Ваши команды
-                            .ui.relaxed.divided.list
-                                each team in myTeams
-                                    .item
-                                        .description
-                                            p= team.nameTeam
-                                        .description
-                                            each game in team.listGameTeam
-                                                i= game
-                        a(href="/profile/teams/create").ui.bottom.attached.button
-                            i.add.icon
-                            |       Создать новую команду
+                        if myTeams.length > 0
+                            .content
+                                .header
+                                    a(href='/profile/teams') Ваши команды
+                                .ui.relaxed.divided.list
+                                    each team in myTeams
+                                        .item
+                                            .description
+                                                a(href=`/profile/teams/${team._id}`)= team.nameTeam
+                                            .description
+                                                each game in team.listGameTeam
+                                                    i= game
+                                            .description
+                                                a(href=`/profile/teams/${team._id}/update`) Изменить
+                            a(href="/profile/teams/create").ui.bottom.attached.button
+                                i
+                                |    Создать новую команду
+            .row
+                .ui.cards
+                    .card
+                        if teams.length > 0
+                            .content
+                                .header
+                                    a(href='/profile/teams') Ваши команды
+                                .ui.relaxed.divided.list
+                                    each team in teams
+                                        .item
+                                            .description
+                                                a(href=`/profile/teams/${team._id}`)= team.nameTeam
+                                            .description
+                                                each game in team.listGameTeam
+                                                    i= game
+                                            .description
+                                                a(href=`/profile/teams/${team._id}/update`) Изменить

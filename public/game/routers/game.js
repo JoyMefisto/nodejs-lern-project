@@ -2,12 +2,13 @@ const { Router } = require('express');
 const router = Router();
 
 const { game, players, teams, tournaments } = require('../controllers');
+const { params } = require('../../controllers');
 const { auth } = require('../../middleware');
 
-router.param('game', game.setParamGame);
-router.param('team_id', game.setParamTeamId);
-router.param('player_id', game.setParamPlayerId);
-router.param('tournament_id', game.setParamTournamentId);
+router.param('game', params.setParamGame);
+router.param('team_id', params.setParamTeamId);
+router.param('player_id', params.setParamPlayerId);
+router.param('tournament_id', params.setParamTournamentId);
 
 router.get('/:game', game.showGame); // GET /:game - Страница одной из игр (dota2|csgo|lol|hearthstone|overwatch)
 
