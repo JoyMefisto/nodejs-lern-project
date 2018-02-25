@@ -5,9 +5,6 @@ block aside
 
 block content
     h1 Список игроков
-    = JSON.stringify(listPlayers[0])
-    br
-    = JSON.stringify(listPlayers[1])
 
     .ui.cards
         each player in listPlayers
@@ -19,7 +16,9 @@ block content
                     .meta
                         = player.game
                     .meta
+                        //= JSON.stringify(player)
                         each team in player.teams
-                            span= team.name
+                            span= team.nameTeam
+                            hr
                     .description
                         | Elliot requested permission to view your contact details

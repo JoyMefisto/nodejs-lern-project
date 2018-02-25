@@ -4,9 +4,41 @@ block aside
     include ../../_includes/aside-menu-two
 
 block content
-    h3= oneTeam.nameTeam
+    .ui.grid
+        .one.column.large.screen.only.margin__row_20
+            .row
+                span Название команды:
+                span= oneTeam.nameTeam
 
-    ul
-        each player in listPlayers
-            li
-                a(href=`/${game}/players/${player.id}`)= player.name
+    .ui.grid
+        .one.column.large.screen.only.margin__row_20
+            .row
+                .ui.cards
+                    .card
+                        .content
+                            .header
+                                h5 Игры в которых учавствует команда
+                            .card
+                                .content
+                                    if oneTeam.listPlayers > 0
+                                        each game in oneTeam.listGameTeam
+                                            span= game
+                                    else
+                                        span Список пуст
+    .ui.grid
+        .one.column.large.screen.only.margin__row_20
+            .row
+                .ui.cards
+                    .card
+                        .content
+                            .header
+                                h5 Список участников команды
+                            .card
+                                .content
+                                    if listPlayers.length > 0
+                                        ul
+                                            each player in listPlayers
+                                                li
+                                                    a(href=`/${game}/players/${player.id}`)= player.nameTeam
+                                    else
+                                        span Список пуст

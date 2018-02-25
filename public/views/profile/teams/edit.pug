@@ -5,30 +5,65 @@ block aside
 
 block content
     =  JSON.stringify(player)
-    div.container__form.margin__row_20
-        form(method='post').ui.form
-            div.field
-                input(name='id' value= team._id || '' placeholder="ID" type='hidden')
-                input(type='hidden' name='creatorTeam' value=player._id)
-                div(class="ui input field")
-                    input(name='nameTeam' type='text' placeholder='Название' value=team.nameTeam required)
-                div.ui.list
-                    each gameOne in games
-                        .item
-                            .ui.master.checkbox
-                                - var isCheked = team.listGameTeam.some(el => el === gameOne.game);
-                                input(id=gameOne.game type='checkbox', name='listGameTeam' value=gameOne.game checked=isCheked)
-                                label(for=gameOne.game)= gameOne.name
+    .ui.grid
+        .one.column.large.screen.only.margin__row_20
+            .row
+                .ui.cards
+                    .card
+                        .content
+                            span Изменить имя
+                            form(method='post').ui.form
+                                div.field
+                                    input(name='id' value= team._id || '' placeholder="ID" type='hidden')
+                                    input(type='hidden' name='creatorTeam' value=player._id)
+                                    div(class="ui input field")
+                                        input(name='nameTeam' type='text' placeholder='Название' value=team.nameTeam required)
+                                    div.ui.list
+                                        each gameOne in games
+                                            .item
+                                                .ui.master.checkbox
+                                                    - var isCheked = team.listGameTeam.some(el => el === gameOne.game);
+                                                    input(id=gameOne.game type='checkbox', name='listGameTeam' value=gameOne.game checked=isCheked)
+                                                    label(for=gameOne.game)= gameOne.name
 
+                                div.field
+                                    button(type='submit' class='ui green button')= team._id ? 'Сохранить' : 'Создать'
+                                    if team._id
+                                        a(href=`/profile/teams/${team._id}/delete` class='ui red button') Удалить
+            .row
+                .ui.cards
+                    .card
+                        .content
+                            span Найти игрока
+                            form(method="POST" id="js_form_search_players").ui.form
+                                .card
+                                    .content
+                                        .field
+                                            .ui.search
+                                                input.prompt(type='text' id='js_input_search_players' name="player" placeholder='Имя или email...' autocomplete='off')
+                                                .results#js_results_search_players
+                                        .field
+                                            .ui.middle.aligned.divided.list#js_results_list_players
+                                                .item
+                                                    .right.floated.content
+                                                        .ui.button Add
+                                                    .content
+                                                        | Lena
+                                                .item
+                                                    .right.floated.content
+                                                        .ui.button Add
+                                                    .content
+                                                        | Lindsay
+                                                .item
+                                                    .right.floated.content
+                                                        .ui.button Add
+                                                    .content
+                                                        | Mark
+                                                .item
+                                                    .right.floated.content
+                                                        .ui.button Add
+                                                    .content
+                                                        | Molly
 
-                    //select(name="game")
-                    //    each gameOne in games
-                    //        if gameOne.game == game
-                    //            option(value=gameOne.game selected)= gameOne.name
-                    //        else
-                    //            option(value=gameOne.game )= gameOne.name
-
-            div.field
-                button(type='submit' class='ui green button')= team._id ? 'Сохранить' : 'Создать'
-                if team._id
-                    a(href=`/profile/teams/${team._id}/delete` class='ui red button') Удалить
+                                        .field
+                                            button(type='submit' class='ui green button') Найти

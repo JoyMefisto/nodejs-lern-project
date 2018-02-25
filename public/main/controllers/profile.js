@@ -1,4 +1,4 @@
-const { team: Team, game: Game } = require('../../../shared/models');
+const { team: Team, game: Game, player: Player } = require('../../../shared/models');
 const { ObjectID } = require('mongodb');
 
 module.exports = {
@@ -19,11 +19,15 @@ module.exports = {
     },
     // GET /profile
     showProfile(req, res) {
-        res.render('profile/profile', {
-            player: req.player,
-            teams: req.teams,
-            myTeams: req.myTeams
+        Game.find({}).then(games => {
+            res.render('profile/profile', {
+                player: req.player,
+                teams: req.teams,
+                myTeams: req.myTeams,
+                games
+            })
         })
+
     },
     showMyTeams(req, res, next) {
         res.render('profile/teams/teams', {
@@ -34,6 +38,8 @@ module.exports = {
     },
     // GET /profile/teams/:team_id
     showOneTeam(req, res) {
+        console.log('player',req.player);
+        console.log('myTeams', req.myTeams);
         res.render('profile/teams/team', { oneTeam: req.team, listPlayers: req.players, game: req.game })
     },
 
@@ -79,6 +85,11 @@ module.exports = {
             .then(team => res.redirect(`/profile`))
             .catch(next);
     },
+    updateGameList(req, res, next){
+        Player.findByIdAndUpdate(req.body.id, req.body)
+              .then(player => res.redirect('/profile') )
+              .catch(next);
+    },
     // GET /profile/teams/:team_id/delete
     showPageDeleteTeam(req, res, next) {
         res.render('profile/teams/delete', {
@@ -91,6 +102,31 @@ module.exports = {
         req.team.remove()
             .then(() => res.redirect(`/profile`))
             .catch(next);
+    },
+
+    searchPlayer(req, res, next) {
+        let regex = new RegExp(req.body.player, 'gi');
+
+        Player.find({
+                $or: [
+                    { email: regex },
+                    { name: regex }
+                ]
+            })
+            .then(result => {
+                let players = result.map(player => {
+                    return {
+                        id: player._id,
+                        name: player.name,
+                        email: player.email,
+                    }
+                });
+
+                console.log(players);
+                res.send(players);
+            })
+            .catch(next);
+
     }
 
 };

@@ -4,43 +4,54 @@ block aside
     include ../../_includes/aside-menu-two
 
 block content
-    h1 Мои команды
+    .ui.grid
+        .one.column.large.screen.only.margin__row_20
+            h1 Мои команды
     //a.ui.primary.button(href=`${baseUrl}/create`) New team
-
-    .ui.column
-
-        .ui.column
-            h4 Команды в которых я состаю
-
-            .ui.cards
-                each team in teams
+    .ui.grid
+        .one.column.large.screen.only.margin__row_20
+            .row
+                .ui.cards
                     .card
                         .content
-                            img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
                             .header
-                                a(href=`${baseUrl}/${team.id}`)= team.name
-                            .meta
-                                | Friends of Veronika
-                            .description
-                                | Elliot requested permission to view your contact details
-                        //.extra.content
-                        //    .ui.two.buttons
-                        //        a.ui.basic.green.button(href=`${baseUrl}/${team.id}/update`) Изменить
-                        //        a.ui.basic.red.button(href=`${baseUrl}/${team.id}/delete`) Удалить
-        .ui.column
-            h4 Мои созданные команды
-            .ui.cards
-                each team in myTeams
+                                h4 Мои созданные команды
+                            if myTeams.length > 0
+                                each team in myTeams
+                                    .card
+                                        .content
+                                            img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
+                                            .header
+                                                a(href=`/profile/teams/${team.id}`)= team.nameTeam
+                                            .meta
+                                                | Friends of Veronika
+                                            .description
+                                                | Elliot requested permission to view your contact details
+                            else
+                                .card
+                                    .content
+                                        span Вы не создали ни одной команды
+                        a(href="/profile/teams/create").ui.bottom.attached.button
+                            i
+                            |    Создать новую команду
+            .row
+                .ui.cards
                     .card
                         .content
-                            img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
                             .header
-                                a(href=`/profile/teams/${team.id}`)= team.nameTeam
-                            .meta
-                                | Friends of Veronika
-                            .description
-                                | Elliot requested permission to view your contact details
-                        //.extra.content
-                        //    .ui.two.buttons
-                        //        a.ui.basic.green.button(href=`${baseUrl}/${team.id}/update`) Изменить
-                        //        a.ui.basic.red.button(href=`${baseUrl}/${team.id}/delete`) Удалить
+                                h4 Команды в которых я состаю
+                            if teams.length > 0
+                                each team in teams
+                                    .card
+                                        .content
+                                            img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
+                                            .header
+                                                a(href=`${baseUrl}/${team.id}`)= team.name
+                                            .meta
+                                                | Friends of Veronika
+                                            .description
+                                                | Elliot requested permission to view your contact details
+                            else
+                                .card
+                                    .content
+                                        span Вы не состоите ни в одной команде

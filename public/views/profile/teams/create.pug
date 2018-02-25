@@ -17,14 +17,6 @@ block content
                                 input(id=gameOne.game type='checkbox', name='listGameTeam' value=gameOne.game)
                                 label(for=gameOne.game)= gameOne.name
 
-
-                    //select(name="game")
-                    //    each gameOne in games
-                    //        if gameOne.game == game
-                    //            option(value=gameOne.game selected)= gameOne.name
-                    //        else
-                    //            option(value=gameOne.game )= gameOne.name
-
             div.field
                 button(type='submit' class='ui green button')= team._id ? 'Сохранить' : 'Создать'
                 if team._id

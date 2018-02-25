@@ -12,7 +12,9 @@ router.param('tournament_id', params.setParamTournamentId);
 
 // GET /profile
 router.get('/', profile.showProfile);
+router.post('/updateGameList', profile.updateGameList);
 router.get('/teams', profile.showMyTeams);
+router.post('/teams/searchPlayer', profile.searchPlayer);
 
 router.route('/teams/create')
     .get(profile.showPageCreateTeam)

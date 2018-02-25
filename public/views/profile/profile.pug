@@ -4,21 +4,35 @@ block content
     .ui.grid
         .one.column.large.screen.only.margin__row_20
             .row
-                h5= player.name
                 .field
-                    player.email
+                    span Имя:
+                    span= player.name
+
                 .field
+                    span email:
+                    span= player.email
+
+                .field
+                    span Статус:
                     if player.role === 'user'
                         span Пользователь
                     else
                         span Админ
+
             .row
                 .ui.cards
                     .card
-                        if myTeams.length > 0
-                            .content
-                                .header
-                                    a(href='/profile/teams') Ваши команды
+                        .content
+                            .header
+                                a(href='/profile/teams') Ваши команды
+            .row
+                .ui.cards
+                    .card
+                        .content
+                            .header
+                                h3 Команды которые я создал:
+
+                            if myTeams.length > 0
                                 .ui.relaxed.divided.list
                                     each team in myTeams
                                         .item
@@ -29,16 +43,22 @@ block content
                                                     i= game
                                             .description
                                                 a(href=`/profile/teams/${team._id}/update`) Изменить
-                            a(href="/profile/teams/create").ui.bottom.attached.button
-                                i
-                                |    Создать новую команду
+                            else
+                                .ui.relaxed.divided.list
+                                    .item
+                                        .description
+                                            span Вы не создали ни одной команды
+                        a(href="/profile/teams/create").ui.bottom.attached.button
+                            i
+                            |    Создать новую команду
             .row
                 .ui.cards
                     .card
-                        if teams.length > 0
-                            .content
-                                .header
-                                    a(href='/profile/teams') Ваши команды
+                        .content
+                            .header
+                                h3 Команды в которых я состою:
+
+                            if teams.length > 0
                                 .ui.relaxed.divided.list
                                     each team in teams
                                         .item
@@ -49,3 +69,24 @@ block content
                                                     i= game
                                             .description
                                                 a(href=`/profile/teams/${team._id}/update`) Изменить
+                            else
+                                .ui.relaxed.divided.list
+                                    .item
+                                        .description
+                                          span Вы не состоите ни в одной команде
+            .row
+                .ui.cards
+                    .card
+                        .content
+                            .header
+                                h4 Для каких игр Вас показывать:
+                            form(method="POST" action="/profile/updateGameList").ui.relaxed.divided.list
+                                input(type="hidden" name='id' value=player.id)
+
+                                each gameOne in games
+                                     .item
+                                        .ui.master.checkbox
+                                            - var isCheked = player.participationGame.some(el => el === gameOne.game );
+                                            input(id=gameOne.game type='checkbox', name='participationGame' value=gameOne.game checked=isCheked)
+                                            label(for=gameOne.game)= gameOne.name
+                                button(type='submit' class='ui green button') Сохранить
