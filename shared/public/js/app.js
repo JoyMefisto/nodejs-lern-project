@@ -1,30 +1,14 @@
-Array.prototype.unique = function() {
-    var a = this.concat();
-    for(var i=0; i<a.length; ++i) {
-        for(var j=i+1; j<a.length; ++j) {
-            if(a[i] === a[j])
-                a.splice(j--, 1);
-        }
-    }
-
-    return a;
-};
-
 $('document').ready(()=>{
-    let searchPlayers = [];
-
-    function containerShow(container) {
-        $(container).show();
-    }
-    function containerHide(container) {
-        $(container).hide();
-    }
-
+    let dropdownPlayers = [];
+    let listPlayers = [];
+    /**
+     * @title Ajax request
+     */
     $('#js_input_search_players').on('keyup', (e) => {
         e.preventDefault();
 
         if($(e.target).val().split('').length <= 2) {
-            containerHide('#js_results_search_players');
+            containerHide('#js_results_dropdown_players');
             return;
         }
 
@@ -34,70 +18,101 @@ $('document').ready(()=>{
             method: "POST",
             data: data,
             success(data, textStatus, jqXHR){
-                console.log(data);
-                (data.length > 0) ? buildListSearchPlayers(data, '#js_results_list_players') : buildNoResultOnSearchPlayer('#js_results_search_players');
+                (data.length > 0) ? buildListDropdownPlayers(data, '#js_results_dropdown_players') : buildNoResultOnSearchPlayer('#js_results_dropdown_players');
             }
         })
     });
 
-    $('#js_results_search_players').on('click', function (e) {
+    /**
+     * @title Checked element in dropdown
+     */
+    $('#js_results_dropdown_players').on('click', function (e) {
         let elem = $(e.target);
 
         if(elem.is('.title')) {
-            elem.closest('.results').prev().val(elem.text());
-            containerHide(this);
+            moveElementDropdown(elem.data('value'));
+            $('#js_input_search_players').val('');
         }
     });
 
-    // function updateSearchPlayers(data) {
-    //     console.log(data);
-    //     console.log(searchPlayers);
-    //     if(searchPlayers.length === 0) {
-    //         searchPlayers = searchPlayers.concat(data);
-    //     } else {
-    //         searchPlayers = searchPlayers.map(el => {
-    //             return data.map(ael => {
-    //                 if(ael.email !== el.email) return ael;
-    //             })
-    //         })
-    //     }
-    //     console.log(searchPlayers);
-    //     // Object.assign({},searchPlayers, data);
-    //     return searchPlayers;
-    // }
+    /**
+     * @title List Elements
+     */
+    function moveElementDropdown(obj) {
+        console.log(typeof obj);
 
-    function buildNoResultOnSearchPlayer(container) {
-        let result = buildViewNoResult();
-        renderView(result, container);
-        containerShow(container);
+        listPlayers.push(obj);
+        let viewElement = buildListView(obj);
+        renderViewList(viewElement, '#js_results_list_players');
+        containerHide('#js_results_dropdown_players');
     }
-    function buildListSearchPlayers(data, container) {
-        // let objUpdateSearchPlayers = updateSearchPlayers(data);
-        let view = buildView(data);
+    function buildListView(obj) {
+        return `<div class="item">
+            <div class="content" value=${obj.id}>${obj.name}</div>
+            <div class="content">
+              <div class="ui button">Добавить</div>
+              <div class="ui button red">Удалить</div>
+            </div>
+        </div>`
+    }
+
+    /**
+     * @title Dropdown
+     */
+    function buildListDropdownPlayers(data, container) {
+        console.log(data);
+        // let newArr = deleteDublicateDropdownPlayers(data);
+
+        // console.log(newArr);
+        let view = data.length > 0 ? buildDropdownView(data) : buildNoResultOnSearchPlayer('#js_results_dropdown_players');
+
         renderView(view, container);
         containerShow(container);
     };
 
-    function buildViewNoResult() {
-        return $(`<a class=result><div class=content><div class=title>Нет результата</div></div></a>`);
-    }
-    function buildView(data) {
+    function buildDropdownView(data) {
         return data.map(el => {
-            return `<div class="item">
-                <div class="content" value=${el.id}>${el.name}</div>
-                <div class="content">
-                  <div class="ui button">Добавить</div>
-                  <div class="ui button red">Удалить</div>
-                </div>
-            </div>`
+            return $(`<a class=result>
+                        <div class=content>
+                          <div class=title data-value=${JSON.stringify(el)}>${el.name}</div>
+                        </div>
+                      </a>`)
+        });
+    };
+
+    function deleteDublicateDropdownPlayers(data) {
+        // let newArr = listPlayers.concat(data);
+        // return newArr.reduce((x, y) => x.findIndex(e => e.email == y.email) < 0 ? [...x, y] : x, []);
+
+        let newArr = data.map(el => {
+            console.log(el);
+            return listPlayers.find(el);
         });
 
+        console.log(newArr);
+
     }
-
-    function renderView(view, container) {
-        $(container).html(view);
-    }
-
-
-
 });
+
+function containerShow(container) {
+    $(container).show();
+}
+function containerHide(container) {
+    $(container).hide();
+}
+
+function buildNoResultOnSearchPlayer(container) {
+    let result = buildViewNoResult();
+    renderView(result, container);
+    containerShow(container);
+}
+function buildViewNoResult() {
+    return $(`<a class=result><div class=content><div class=title>Нет результата</div></div></a>`);
+}
+
+function renderView(view, container) {
+    $(container).html(view);
+};
+function renderViewList(view, container) {
+    $(container).append(view);
+};
