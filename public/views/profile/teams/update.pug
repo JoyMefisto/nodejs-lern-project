@@ -52,3 +52,26 @@ block content
 
                                         .field
                                             button(type='submit' class='ui green button') Найти
+            .row
+                .ui.cards
+                    .card
+                        .content
+                            span Игроки
+                            form(method="POST" id="js_form_current_players").ui.form
+                                .card
+                                    .content
+                                        .field
+                                            .ui.middle.aligned.divided.list
+                                                if players.length > 0
+                                                    each player in players
+                                                        = JSON.stringify(player)
+
+                                                        .item
+                                                            .content= player.name
+                                                            .content
+                                                                .ui.button.red.js_remove Удалить
+                                                else
+                                                    .item
+                                                        .content Игроков в команде нет
+
+

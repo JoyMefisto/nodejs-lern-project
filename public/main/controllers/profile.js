@@ -19,7 +19,12 @@ module.exports = {
     },
     // GET /profile
     showProfile(req, res) {
+        console.log('player', req.player);
+        console.log('teams', req.teams);
+        console.log('myTeams', req.myTeams);
         Game.find({}).then(games => {
+            console.log('games', games);
+
             res.render('profile/profile', {
                 player: req.player,
                 teams: req.teams,
@@ -70,9 +75,11 @@ module.exports = {
 
     // GET /profile/teams/:team_id/update
     showPageUpdateTeam(req, res, next) {
+        console.log(req.players);
         Game.find({}).then(games => {
-            res.render('profile/teams/edit', {
+            res.render('profile/teams/update', {
                 team: req.team,
+                players: req.players,
                 game: req.game,
                 games: games
             });

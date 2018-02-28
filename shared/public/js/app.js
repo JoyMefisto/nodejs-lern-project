@@ -1,6 +1,18 @@
 $('document').ready(()=>{
     let dropdownPlayers = [];
     let listPlayers = [];
+
+    $('#js_results_list_players').on('click', (e) => {
+        console.log(e.target);
+        let btnRemove = $(e.target);
+
+        if(btnRemove.is('.js_remove')) {
+            btnRemove.closest('.item').remove();
+        }
+        console.log($(e.target).is('.js_remove'));
+    });
+
+
     /**
      * @title Ajax request
      */
@@ -51,7 +63,7 @@ $('document').ready(()=>{
             <div class="content" value=${obj.id}>${obj.name}</div>
             <div class="content">
               <div class="ui button">Добавить</div>
-              <div class="ui button red">Удалить</div>
+              <div class="ui button red js_remove">Убрать</div>
             </div>
         </div>`
     }
