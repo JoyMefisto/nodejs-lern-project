@@ -123,7 +123,7 @@ module.exports = {
             .then(result => {
                 let players = result.map(player => {
                     return {
-                        id: player._id,
+                        _id: player._id,
                         name: player.name,
                         email: player.email,
                     }
@@ -134,6 +134,24 @@ module.exports = {
             })
             .catch(next);
 
+    },
+
+    addPlayerInTeam(req, res, next) {
+        let { team_id, player_id } = req.body;
+
+        Player.update({ _id: player_id}, {$addToSet: { teams: ObjectID(team_id) }}).then(player => {
+            res.send(player);
+
+        });
+    },
+    deletePlayerInTeam(req, res, next) {
+        let { team_id, player_id } = req.body;
+
+        console.log(team_id, player_id);
+        Player.update({ _id: player_id}, {$pull: { teams: ObjectID(team_id) }}).then(player => {
+            res.send(player);
+        });
     }
+
 
 };

@@ -15,6 +15,8 @@ router.get('/', profile.showProfile);
 router.post('/updateGameList', profile.updateGameList);
 router.get('/teams', profile.showMyTeams);
 router.post('/teams/searchPlayer', profile.searchPlayer);
+router.post('/teams/addPlayerInTeam', profile.addPlayerInTeam);
+router.post('/teams/deletePlayerInTeam', profile.deletePlayerInTeam);
 
 router.route('/teams/create')
     .get(profile.showPageCreateTeam)

@@ -3,13 +3,11 @@ $('document').ready(()=>{
     let listPlayers = [];
 
     $('#js_results_list_players').on('click', (e) => {
-        console.log(e.target);
         let btnRemove = $(e.target);
 
         if(btnRemove.is('.js_remove')) {
             btnRemove.closest('.item').remove();
         }
-        console.log($(e.target).is('.js_remove'));
     });
 
 
@@ -29,30 +27,63 @@ $('document').ready(()=>{
         $.ajax('/profile/teams/searchPlayer', {
             method: "POST",
             data: data,
-            success(data, textStatus, jqXHR){
-                (data.length > 0) ? buildListDropdownPlayers(data, '#js_results_dropdown_players') : buildNoResultOnSearchPlayer('#js_results_dropdown_players');
+            success(result, textStatus, jqXHR){
+                (result.length > 0) ? buildListDropdownPlayers(result, '#js_results_dropdown_players') : buildNoResultOnSearchPlayer('#js_results_dropdown_players');
             }
         })
     });
 
+    $('#js_form_search_players').on('click', '.js_add', (e) => {
+        let
+            event = $(e.currentTarget),
+            item = event.closest('.item'),
+            value = item.find('[name=player_id]').data('value'),
+            form = event.closest('form'),
+            url = form.attr('action'),
+            team_id = form.find('[name=team_id]').attr('value');
+
+        let data = {
+            player_id: value._id,
+            team_id: team_id,
+            value
+        };
+
+        $.ajax(url, {
+            method: "POST",
+            data,
+            success(result, textStatus, jqXHR) {
+                let view = addedViewPlayerOnTeam(data);
+                renderViewList(view, '#js_list_players');
+                item.remove();
+            }
+        })
+    });
+
+    function addedViewPlayerOnTeam(obj) {
+        return $(`<div class="item">
+                        <div class="content">${obj.value.name}
+                            <input type="hidden" name="player_id" data-value=${JSON.stringify(obj.value)}>
+                        </div>
+                        <div class="content">
+                            <div class="ui button red js_remove">Удалить</div>
+                        </div>
+                    </div>`)
+    }
+
     /**
      * @title Checked element in dropdown
      */
-    $('#js_results_dropdown_players').on('click', function (e) {
+    $('#js_results_dropdown_players').on('click', '.title', function (e) {
         let elem = $(e.target);
 
-        if(elem.is('.title')) {
-            moveElementDropdown(elem.data('value'));
-            $('#js_input_search_players').val('');
-        }
+        moveElementDropdown(elem.data('value'));
+        $('#js_input_search_players').val('');
     });
 
     /**
      * @title List Elements
      */
     function moveElementDropdown(obj) {
-        console.log(typeof obj);
-
         listPlayers.push(obj);
         let viewElement = buildListView(obj);
         renderViewList(viewElement, '#js_results_list_players');
@@ -60,22 +91,44 @@ $('document').ready(()=>{
     }
     function buildListView(obj) {
         return `<div class="item">
-            <div class="content" value=${obj.id}>${obj.name}</div>
-            <div class="content">
-              <div class="ui button">Добавить</div>
-              <div class="ui button red js_remove">Убрать</div>
-            </div>
-        </div>`
+                    <div class="content">${obj.name}</div>
+                    <input type="hidden" name="player_id" data-value=${JSON.stringify(obj)}>
+                    <div class="content">
+                      <div class="ui button js_add">Добавить</div>
+                      <div class="ui button red js_remove">Убрать</div>
+                    </div>
+                </div>`
     }
 
+    $('#js_list_players').on('click', '.js_remove', (e) => {
+        let
+            event = $(e.currentTarget),
+            item = event.closest('.item'),
+            value = item.find('[name=player_id]').data('value'),
+            form = event.closest('form'),
+            url = form.attr('action'),
+            team_id = form.find('[name=team_id]').attr('value');
+
+        let data = {
+            player_id: value._id,
+            team_id: team_id,
+            value
+        };
+
+        $.ajax(url, {
+            method: "POST",
+            data,
+            success(result, textStatus, jqXHR) {
+                item.remove();
+            }
+        })
+    });
     /**
      * @title Dropdown
      */
     function buildListDropdownPlayers(data, container) {
-        console.log(data);
         // let newArr = deleteDublicateDropdownPlayers(data);
 
-        // console.log(newArr);
         let view = data.length > 0 ? buildDropdownView(data) : buildNoResultOnSearchPlayer('#js_results_dropdown_players');
 
         renderView(view, container);
@@ -97,12 +150,8 @@ $('document').ready(()=>{
         // return newArr.reduce((x, y) => x.findIndex(e => e.email == y.email) < 0 ? [...x, y] : x, []);
 
         let newArr = data.map(el => {
-            console.log(el);
             return listPlayers.find(el);
         });
-
-        console.log(newArr);
-
     }
 });
 

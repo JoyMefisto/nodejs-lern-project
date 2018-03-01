@@ -35,12 +35,13 @@ block content
                     .card
                         .content
                             span Найти игрока
-                            form(method="POST" id="js_form_search_players").ui.form
+                            form(action='/profile/teams/addPlayerInTeam' method="POST" id="js_form_search_players").ui.form
+                                input(type='hidden' name='team_id' value=team.id).hidden
                                 .card
                                     .content
                                         .field
                                             .ui.search
-                                                input.prompt(type='text' id='js_input_search_players' name="player" placeholder='Имя или email...' autocomplete='off')
+                                                input.prompt(type='text' id='js_input_search_players' name="search" placeholder='Имя или email...' autocomplete='off')
                                                 .results#js_results_dropdown_players
                                         .field
                                             .ui.middle.aligned.divided.list#js_results_list_players
@@ -50,24 +51,22 @@ block content
                                                 //    .content
                                                 //        | Lena
 
-                                        .field
-                                            button(type='submit' class='ui green button') Найти
             .row
                 .ui.cards
                     .card
                         .content
-                            span Игроки
-                            form(method="POST" id="js_form_current_players").ui.form
+                            span Игроки в команде
+                            form(action='/profile/teams/deletePlayerInTeam' method="POST" id="js_form_current_players").ui.form
+                                input(type='hidden' name='team_id' value=team.id).hidden
                                 .card
                                     .content
                                         .field
-                                            .ui.middle.aligned.divided.list
+                                            .ui.middle.aligned.divided.list#js_list_players
                                                 if players.length > 0
                                                     each player in players
-                                                        = JSON.stringify(player)
-
                                                         .item
                                                             .content= player.name
+                                                                input(type="hidden" name="player_id" data-value=player)
                                                             .content
                                                                 .ui.button.red.js_remove Удалить
                                                 else
