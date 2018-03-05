@@ -3,14 +3,23 @@ const Schema = mongoose.Schema;
 
 const Tournament = new Schema({
     _id: { type: Schema.Types.ObjectId },
-    name: String,
+    nameTournament: String,
     date: String,
     game: String,
     cash: String,
-    teams: [{ type: Schema.Types.ObjectId, ref: 'Team' }] // №1
-}, {
-    // versionKey: false // You should be aware of the outcome after set to false (add field '__v' )
+    // teams: [{ type: Schema.Types.ObjectId, ref: 'Team' }], // №1
+    creatorTournament: { type: Schema.Types.ObjectId, required: true } // Создатель турнира
 });
+
+Tournament.virtual('teams', {
+    ref: 'Team', // The model to use
+    localField: '_id', // Find people where `localField` относительно турнира
+    foreignField: 'tournaments', // is equal to `foreignField` относительно команды
+    // If `justOne` is true, 'members' will be a single doc as opposed to
+    // an array. `justOne` is false by default.
+    justOne: false // если один то true
+});
+
 
 // №2
 // Tournament.virtual('teams', {

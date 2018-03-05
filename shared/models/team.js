@@ -5,6 +5,7 @@ const Team = new Schema({
     _id: { type: Schema.Types.ObjectId },
     nameTeam: { type: String, unique: true, sparse: true }, // Имя команды
     listGameTeam: [{ type: Schema.Types.String, default: '' }], // Игры, в которых учавствует команда
+    tournaments: [{ type: Schema.Types.ObjectId, ref: 'Tournament' }],
     creatorTeam: { type: Schema.Types.ObjectId, required: true } // Создатель команды
     // url: { type: Schema.Types.String, default: '' }
 });

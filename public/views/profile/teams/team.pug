@@ -20,9 +20,9 @@ block content
                                 h5 Игры в которых учавствует команда
                             .card
                                 .content
-                                    if oneTeam.listPlayers > 0
+                                    if oneTeam.listGameTeam.length > 0
                                         each game in oneTeam.listGameTeam
-                                            span= game
+                                            div= game
                                     else
                                         span Список пуст
     .ui.grid
@@ -39,6 +39,6 @@ block content
                                         ul
                                             each player in listPlayers
                                                 li
-                                                    a(href=`/${game}/players/${player.id}`)= player.nameTeam
+                                                    a(href=`/profile/players/${player.id}`)= player.name
                                     else
                                         span Список пуст

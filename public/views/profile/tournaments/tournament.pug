@@ -1,0 +1,24 @@
+extends ../../_layout
+block aside
+    include ../../_includes/aside-menu-two
+
+block content
+    h1= oneTournament.nameTournament
+    h5= oneTournament.date
+    h5= oneTournament.cash
+    h5= oneTournament.game
+    h3 Список команд
+
+    ul.ui.cards
+        each team in listTeams
+            li.card= team.nameTeam
+                .content
+                    img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
+                    .header
+                        a(href=`/profile/teams/${team.id}`)= team.nameTeam
+                    .meta= JSON.stringify(team.listGameTeam)
+                    .description
+                        | Elliot requested permission to view your contact details
+
+        //= JSON.stringify(oneTournament)
+        //= JSON.stringify(listTeams)

@@ -1,0 +1,76 @@
+extends ../../_layout
+
+block aside
+    include ../../_includes/aside-menu-two
+
+block content
+    =  JSON.stringify(player)
+    .ui.grid
+        .one.column.large.screen.only.margin__row_20
+            .row
+                .ui.cards
+                    .card
+                        .content
+                            span Изменить имя
+                            form(method='post').ui.form
+                                div.field
+                                    input(name='id' value= team._id || '' placeholder="ID" type='hidden')
+                                    input(type='hidden' name='creatorTeam' value=player._id)
+                                    div(class="ui input field")
+                                        input(name='nameTeam' type='text' placeholder='Название' value=team.nameTeam required)
+                                    div.ui.list
+                                        each gameOne in games
+                                            .item
+                                                .ui.master.checkbox
+                                                    - var isCheked = team.listGameTeam.some(el => el === gameOne.game);
+                                                    input(id=gameOne.game type='checkbox', name='listGameTeam' value=gameOne.game checked=isCheked)
+                                                    label(for=gameOne.game)= gameOne.name
+
+                                div.field
+                                    button(type='submit' class='ui green button')= team._id ? 'Сохранить' : 'Создать'
+                                    if team._id
+                                        a(href=`/profile/teams/${team._id}/delete` class='ui red button') Удалить
+            .row
+                .ui.cards
+                    .card
+                        .content
+                            span Найти игрока
+                            form(action='/profile/teams/addPlayerInTeam' method="POST" id="js_form_search_players").ui.form
+                                input(type='hidden' name='team_id' value=team.id).hidden
+                                .card
+                                    .content
+                                        .field
+                                            .ui.search
+                                                input.prompt(type='text' id='js_input_search_players' name="search" placeholder='Имя или email...' autocomplete='off')
+                                                .results#js_results_dropdown_players
+                                        .field
+                                            .ui.middle.aligned.divided.list#js_results_list_players
+                                                //.item
+                                                //    .right.floated.content
+                                                //        .ui.button Add
+                                                //    .content
+                                                //        | Lena
+
+            .row
+                .ui.cards
+                    .card
+                        .content
+                            span Игроки в команде
+                            form(action='/profile/teams/deletePlayerInTeam' method="POST" id="js_form_current_players").ui.form
+                                input(type='hidden' name='team_id' value=team.id).hidden
+                                .card
+                                    .content
+                                        .field
+                                            .ui.middle.aligned.divided.list#js_list_players
+                                                if players.length > 0
+                                                    each player in players
+                                                        .item
+                                                            .content= player.name
+                                                                input(type="hidden" name="player_id" data-value=player)
+                                                            .content
+                                                                .ui.button.red.js_remove Удалить
+                                                else
+                                                    .item
+                                                        .content Игроков в команде нет
+
+

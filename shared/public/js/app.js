@@ -26,7 +26,7 @@ $('document').ready(()=>{
 
         $.ajax('/profile/teams/searchPlayer', {
             method: "POST",
-            data: data,
+            data: data[1],
             success(result, textStatus, jqXHR){
                 (result.length > 0) ? buildListDropdownPlayers(result, '#js_results_dropdown_players') : buildNoResultOnSearchPlayer('#js_results_dropdown_players');
             }

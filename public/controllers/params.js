@@ -15,6 +15,7 @@ module.exports = {
             }).catch(next);
 
     },
+
     setParamPlayerId(req, res, next, player_id) { // /:game/players/:player_id
         req.player_id = player_id;
         next();
@@ -23,8 +24,9 @@ module.exports = {
         Tournament.findById(tournament_id)
             .populate('teams')
             .then(tournament => {
+                console.log('setParamTournamentId', tournament);
                 req.tournament = tournament;
-                req.teams = tournament.teams;
+                req.tournamentTeams = tournament.teams;
                 next();
             }).catch(next);
     }

@@ -5,6 +5,7 @@ module.exports = {
         if (req.session) {
             Player.findById(req.session.playerId)
                 .then(player => {
+                    console.log(player);
                     req.player = player;
                     res.locals.player = player;
 

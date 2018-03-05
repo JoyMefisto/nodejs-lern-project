@@ -79,6 +79,34 @@ block content
                     .card
                         .content
                             .header
+                                a(href='/profile/tournaments') Ваши турниры
+            .row
+                .ui.cards
+                    .card
+                        .content
+                            .header
+                                h3 Турниры которые я создал:
+                            if myTournaments.length > 0
+                                .ui.relaxed.divided.list
+                                    each tournament in myTournaments
+                                        .item
+                                            .description
+                                                a(href=`/profile/tournaments/${tournament._id}`)= tournament.nameTournament
+                                            .description
+                                                a(href=`/profile/tournaments/${tournament._id}/update`) Изменить
+                            else
+                                .ui.relaxed.divided.list
+                                    .item
+                                        .description
+                                            span Вы не создали ни одной команды
+                        a(href="/profile/tournaments/create").ui.bottom.attached.button
+                            i
+                            |    Создать новый турнир
+            .row
+                .ui.cards
+                    .card
+                        .content
+                            .header
                                 h4 Для каких игр Вас показывать:
                             form(method="POST" action="/profile/updateGameList").ui.relaxed.divided.list
                                 input(type="hidden" name='id' value=player.id)

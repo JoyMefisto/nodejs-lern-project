@@ -1,0 +1,20 @@
+extends ../../_layout
+
+block aside
+    include ../../_includes/aside-menu-two
+
+block content
+    h1 Мои турниры
+
+    ul.ui.cards
+        each tournament in myTournaments
+            li.card
+                = JSON.stringify(tournament)
+                .content
+                    img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
+                    .header
+                        a(href=`/profile/tournaments/${tournament.id}`)= tournament.nameTournament
+                    .meta
+                        | Friends of Veronika
+                    .description
+                        | Elliot requested permission to view your contact details
