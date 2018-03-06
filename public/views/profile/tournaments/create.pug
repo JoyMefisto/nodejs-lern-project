@@ -6,18 +6,41 @@ block aside
 block content
     div.container__form.margin__row_20
         form(method='post').ui.form
+            //|player
+            //= JSON.stringify(player)
+            //hr
+            //|tournament
+            //= JSON.stringify(tournament)
+            //hr
+            //|game
+            //= JSON.stringify(game)
+            //hr
+            //|games
+            //= JSON.stringify(games)
+
             div.field
-                input(type='hidden' name='creatorTeam' value=player._id)
+                input(type='hidden' name='creatorTournament' value=player._id)
+
+                h5 Имя турнира
                 div(class="ui input field")
-                    input(name='nameTeam' type='text' placeholder='Название' required)
+                    input(name='nameTournament' type='text' placeholder='Название' required)
                 div.ui.list
+                    h5 По какой игре турнир?
                     each gameOne in games
                         .item
-                            .ui.checkbox
-                                input(id=gameOne.game type='checkbox', name='listGameTeam' value=gameOne.game)
+                            .ui.radio.checkbox
+                                input(id=gameOne.game type='radio', name='game' value=gameOne.game)
                                 label(for=gameOne.game)= gameOne.name
 
             div.field
-                button(type='submit' class='ui green button')= team._id ? 'Сохранить' : 'Создать'
-                if team._id
-                    a(href=`/${game}/teams/:${team._id}/delete` class='ui red button') Удалить
+                h5 Призовой фонд в $
+                div(class="ui input field")
+                    input(name='cash' type='number' min=0 placeholder='Призовой фонд' required)
+
+            div.field
+                h5 Дата проведения турнира
+                div(class="ui input field")
+                    input(name='date' type='date' placeholder='Дата проведения' required)
+
+            div.field
+                button(type='submit' class='ui green button') Создать

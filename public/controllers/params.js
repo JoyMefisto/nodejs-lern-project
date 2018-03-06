@@ -24,7 +24,6 @@ module.exports = {
         Tournament.findById(tournament_id)
             .populate('teams')
             .then(tournament => {
-                console.log('setParamTournamentId', tournament);
                 req.tournament = tournament;
                 req.tournamentTeams = tournament.teams;
                 next();

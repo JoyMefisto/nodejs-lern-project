@@ -18,6 +18,4 @@ block content
                                 label(for=gameOne.game)= gameOne.name
 
             div.field
-                button(type='submit' class='ui green button')= team._id ? 'Сохранить' : 'Создать'
-                if team._id
-                    a(href=`/${game}/teams/:${team._id}/delete` class='ui red button') Удалить
+                button(type='submit' class='ui green button') Создать

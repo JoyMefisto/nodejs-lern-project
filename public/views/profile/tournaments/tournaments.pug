@@ -9,12 +9,12 @@ block content
     ul.ui.cards
         each tournament in myTournaments
             li.card
-                = JSON.stringify(tournament)
                 .content
                     img.right.floated.mini.ui.image(src='/images/avatar/large/elliot.jpg')
                     .header
                         a(href=`/profile/tournaments/${tournament.id}`)= tournament.nameTournament
-                    .meta
-                        | Friends of Veronika
+                    .meta= tournament.date
+                    .meta= tournament.cash
+
                     .description
                         | Elliot requested permission to view your contact details

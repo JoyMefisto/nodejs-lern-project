@@ -1,5 +1,4 @@
 $('document').ready(()=>{
-    let dropdownPlayers = [];
     let listPlayers = [];
 
     $('#js_results_list_players').on('click', (e) => {
@@ -127,8 +126,6 @@ $('document').ready(()=>{
      * @title Dropdown
      */
     function buildListDropdownPlayers(data, container) {
-        // let newArr = deleteDublicateDropdownPlayers(data);
-
         let view = data.length > 0 ? buildDropdownView(data) : buildNoResultOnSearchPlayer('#js_results_dropdown_players');
 
         renderView(view, container);
@@ -145,14 +142,6 @@ $('document').ready(()=>{
         });
     };
 
-    function deleteDublicateDropdownPlayers(data) {
-        // let newArr = listPlayers.concat(data);
-        // return newArr.reduce((x, y) => x.findIndex(e => e.email == y.email) < 0 ? [...x, y] : x, []);
-
-        let newArr = data.map(el => {
-            return listPlayers.find(el);
-        });
-    }
 });
 
 function containerShow(container) {

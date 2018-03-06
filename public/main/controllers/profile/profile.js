@@ -10,10 +10,8 @@ module.exports = {
             }).catch(next);
     },
     findTournaments(req, res, next) {
-        console.log('tournaments', req.teams);
         Tournament.find({ '_id': { $in: req.teams.tournaments } })
             .then(tournaments => {
-                console.log(tournaments);
                 req.tournaments = tournaments;
                  next()
             }).catch(next);
@@ -35,7 +33,7 @@ module.exports = {
             .catch(next)
     },
     // GET /profile
-    showProfile(req, res) {
+    showProfile(req, res, next) {
         Game.find({}).then(games => {
             res.render('profile/profile', {
                 player: req.player,
@@ -43,50 +41,13 @@ module.exports = {
                 myTeams: req.myTeams,
                 myTournaments: req.myTournaments,
                 games
-            })
-        })
+            });
+        }).catch(next);
 
     },
     updateGameList(req, res, next){
         Player.findByIdAndUpdate(req.body.id, req.body)
               .then(player => res.redirect('/profile') )
               .catch(next);
-    },
-    // POST /profile/teams/searchPlayer
-    searchPlayer(req, res, next) {
-        let regex = new RegExp(req.body.value, 'gi');
-        Player.find({
-                $or: [
-                    { email: regex },
-                    { name: regex }
-                ]
-            })
-            .then(result => {
-                let players = result.map(player => {
-                    return {
-                        _id: player._id,
-                        name: player.name,
-                        email: player.email,
-                    }
-                });
-                res.send(players);
-            })
-            .catch(next);
-
-    },
-    addPlayerInTeam(req, res, next) {
-        let { team_id, player_id } = req.body;
-
-        Player.update({ _id: player_id}, {$addToSet: { teams: ObjectID(team_id) }}).then(player => {
-            res.send(player);
-
-        });
-    },
-    deletePlayerInTeam(req, res, next) {
-        let { team_id, player_id } = req.body;
-
-        Player.update({ _id: player_id}, {$pull: { teams: ObjectID(team_id) }}).then(player => {
-            res.send(player);
-        });
     }
 };

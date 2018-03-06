@@ -18,9 +18,9 @@ router.param('tournament_id', params.setParamTournamentId);
 router.get('/', profile.showProfile);
 router.post('/updateGameList', profile.updateGameList);
 router.get('/teams', teams.showMyTeams);
-router.post('/teams/searchPlayer', profile.searchPlayer);
-router.post('/teams/addPlayerInTeam', profile.addPlayerInTeam);
-router.post('/teams/deletePlayerInTeam', profile.deletePlayerInTeam);
+router.post('/teams/searchPlayer', teams.searchPlayer);
+router.post('/teams/addPlayerInTeam', teams.addPlayerInTeam);
+router.post('/teams/deletePlayerInTeam', teams.deletePlayerInTeam);
 
 router.route('/teams/create')
     .get(teams.showPageCreateTeam)
@@ -41,9 +41,9 @@ router.route('/teams/:team_id/delete')
  */
 // GET /profile
 router.get('/tournaments', tournaments.showMyTournaments);
-// router.post('/tournaments/searchPlayer', profile.searchPlayer);
-// router.post('/tournaments/addPlayerInTeam', profile.addPlayerInTeam);
-// router.post('/tournaments/deletePlayerInTeam', profile.deletePlayerInTeam);
+router.post('/tournaments/searchTournament', tournaments.searchTournament);
+router.post('/tournaments/addTeamInTournament', tournaments.addTeamInTournament);
+router.post('/tournaments/deleteTeamInTournament', tournaments.deleteTeamInTournament);
 
 router.route('/tournaments/create')
     .get(tournaments.showPageCreateTournament)
